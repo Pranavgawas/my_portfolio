@@ -1,0 +1,15 @@
+/* GlobalStyles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('https://wallpapercave.com/wp/wp9274655.png'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: Fixed background */
+    color: #fff; /* Default text color */
+  }
+  
+  /* Add more global styles as needed */
+  

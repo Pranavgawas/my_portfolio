@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Component/Header';
+import Footer from './Component/Footer';
+import Welcome from './Component/Welcome';
+import AutoSlideCarousel from './Component/AutoSlideCarousel';
+import './Component/GlobalStyles.css'
+
 
 function App() {
+  const carouselItems = [
+    {     
+      image: '1.png',
+    },
+    {
+      image: '2.png',
+    },
+    {
+      image: '3.png',
+    },
+    {
+      image: '4.png',
+    },
+    {
+      image: '5.png',
+    },
+    {
+      image: '6.png',
+    },
+  ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <AutoSlideCarousel items={carouselItems} interval={5000} />
+      <Welcome />
+      <Footer />
+    </>
   );
 }
 

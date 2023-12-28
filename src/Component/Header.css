@@ -1,0 +1,24 @@
+/* Header.css */
+
+/* Customize the background image of the navbar */
+.navbar-custom {
+    background-image: url('https://wallpapercave.com/wp/wp4995644.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Customize the text color of the brand/logo */
+  .navbar-custom .navbar-brand {
+    color: #fff;
+  }
+  
+  /* Customize the text color of the links */
+  .navbar-custom .nav-link {
+    color: #fff;
+  }
+  
+  /* Customize the text color on hover */
+  .navbar-custom .nav-link:hover {
+    color: #ffcc00;
+  }
+  
