@@ -1,25 +1,7 @@
 /* AutoSlideCarousel.css */
 
-/* Style for the carousel container */
-.carousel-container {
-  width: 800px; /* Set the maximum width */
-  height: 400px; /* Set the maximum height */
-  margin: auto; /* Center the carousel */
+/* Override the default styling for carousel images */
+.carousel-container .carousel-item img {
+  height: 300px;
+  object-fit: cover; /* Optional: maintain aspect ratio and cover the container */
 }
-
-/* Style for the carousel images */
-.carousel-item img {
-  width: 100%; /* Make the images fill the container */
-  height: 100%; /* Make the images fill the container */
-  object-fit: cover; /* Maintain aspect ratio and cover the container */
-}
-
-/* Style for the carousel captions */
-.carousel-caption {
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
-  padding: 20px;
-  text-align: center;
-  color: #fff;
-}
-
-/* Add more styles as needed */

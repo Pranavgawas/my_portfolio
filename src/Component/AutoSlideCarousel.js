@@ -1,6 +1,8 @@
+// AutoSlideCarousel.js
+
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import './AutoSlideCarousel.css'; 
+import './AutoSlideCarousel.css'; // Import the custom CSS file
 
 const AutoSlideCarousel = ({ items, interval = 3000 }) => {
   const [index, setIndex] = useState(0);
@@ -19,7 +21,7 @@ const AutoSlideCarousel = ({ items, interval = 3000 }) => {
   }, [items, interval]);
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} interval={null} className='.carousel-container'>
+    <Carousel activeIndex={index} onSelect={handleSelect} interval={null} className='carousel-container'>
       {items.map((item, idx) => (
         <Carousel.Item key={idx}>
           <img
