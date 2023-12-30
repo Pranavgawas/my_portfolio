@@ -12,8 +12,10 @@ function Header() {
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Nav className="me-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+                <Nav.Link href="#Education">Education</Nav.Link>
+                <Nav.Link href="#Project">Project</Nav.Link>
+                <Nav.Link href="#AboutMe">About Me</Nav.Link>
+                <Nav.Link href="#ContactMe">Contact Me</Nav.Link>
                 <img
             alt="Your Logo"
             src="https://i.pinimg.com/originals/34/33/1e/34331ee52a7229c33372739676e502bb.gif"  

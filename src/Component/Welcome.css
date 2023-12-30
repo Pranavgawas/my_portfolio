@@ -1,63 +1,29 @@
 /* Welcome.css */
 
 .container-welcome {
-    text-align: center;
-  }
-  
-  .sphere {
-    width: 100px;
-    height: 100px;
-    background-color: #3498db; /* Set the background color */
-    border-radius: 50%; /* Create a circular shape */
-    margin: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff; /* Set the text color */
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-  }
-  
-  .sphere:hover {
-    background-color: #2980b9; /* Change the background color on hover */
-  }
-  
-  /* Add more styles as needed */
-/* Welcome.css */
+  text-align: center;
+  margin: 20px; /* Adjust the margin as per your preference */
+}
 
-/* ... (previous styles) */
-
-.tooltip {
-    position: relative;
-  }
-  
-  .tooltip .info {
-    display: none;
-    position: absolute;
-    top: 120%; /* Adjust the distance from the sphere */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .tooltip:hover .info {
-    display: block;
-  }
-  
-  /* ... (other styles) */
-  /* Card.css */
-
-.card {
+.card,
+.card1,
+.card2 {
   background-color: rgba(255, 255, 255, 0.3); /* Transparent white background */
   border: 1px solid #ddd; /* Optional: Add border for better visibility */
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for depth */
   transition: background-color 0.3s ease; /* Optional: Add transition for hover effect */
+  margin-bottom: 20px; /* Add space between the cards */
+  border: 1px solid #ccc; /* Optional: Add a border for better visual separation */
+}
+
+.card1{
+  margin-right: 400px;
+}
+
+.card2{
+  margin-left: 400px;
 }
 
 .card:hover {
@@ -67,5 +33,3 @@
 .card-content {
   color: #fff; /* Set text color to white */
 }
-
-    

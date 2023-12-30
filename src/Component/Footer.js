@@ -25,10 +25,10 @@ function Footer() {
           <h4>Follow Us</h4>
             <div className="social-icons">
               <a href="https://www.linkedin.com/in/pranavgawas/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-              <a href="https://github.com/Pranavgawas" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+              <a href="https://github.com/Pranavgawas/" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
               <a href="https://www.instagram.com/_pranav_gawas_/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
-              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+              <a href="https://www.facebook.com/pranav.b.gawas.5/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+              <a href="https://twitter.com/PranavGawas1999" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
               <a href="https://hub.docker.com/u/pranavgawas" target="_blank" rel="noopener noreferrer"><i className="fab fa-docker"></i></a>
             </div>
           </Col>

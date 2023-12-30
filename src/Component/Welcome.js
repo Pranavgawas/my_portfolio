@@ -2,17 +2,14 @@
 
 import React from 'react';
 import './Welcome.css';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
 
 function Welcome() {
   return (
     <div className="container-welcome">
       <h2>My Information</h2>
       <h3>Education</h3>
-      <Row>
-        <Col>
-          <div className="card">
+
+          <div className="card1">
             <div className="card-content">
               <h2>CDAC</h2>
               <p>
@@ -37,9 +34,8 @@ function Welcome() {
             </p>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card2">
             <div className="card-content">
               <h2>Bachlor of Engineering</h2>
               <p>
@@ -65,12 +61,10 @@ function Welcome() {
                 </p>
             </div>
           </div>
-        </Col>
-      </Row>
+
       <h3>Projects</h3>
-      <Row>
-        <Col>
-        <div className="card">
+
+        <div className="card1">
             <div className="card-content">
               <h2>Vehicle Configurator</h2>
               <p>
@@ -85,9 +79,8 @@ function Welcome() {
             </p>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card2">
             <div className="card-content">
               <h2>Pneumatic Sheet Metal Cutting Machine</h2>
               <p>
@@ -104,53 +97,45 @@ function Welcome() {
               </p>
             </div>
           </div>
-        </Col>
-      </Row>
+
       <h3>Skills</h3>
-      <Row>
-        <Col>
-        <div className="card">
+
+        <div className="card1">
             <div className="card-content">
               <h2>JAVA</h2>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card2">
             <div className="card-content">
               <h2>JAKARTA</h2>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card1">
             <div className="card-content">
               <h2>DOTNET(C#)</h2>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card2">
             <div className="card-content">
               <h2>REACT</h2>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+
+        <div className="card1">
             <div className="card-content">
               <h2>JAVASCRIPT</h2>
             </div>
           </div>
-        </Col>
-        <Col>
-        <div className="card">
+ 
+        <div className="card2">
             <div className="card-content">
               <h2>MYSQL</h2>
             </div>
           </div>
-        </Col>
-      </Row>
+
     </div>
   );
 }
