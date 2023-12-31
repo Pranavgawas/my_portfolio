@@ -84,5 +84,6 @@ in scipt
 ```
 
 ```
-npm run build
+npm run deploy
+
 ```
