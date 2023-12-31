@@ -9,22 +9,22 @@ import './Component/GlobalStyles.css'
 function App() {
   const carouselItems = [
     {     
-      image: '1.png',
+      image: '/my_portfolio/1.png',
     },
     {
-      image: '2.png',
+      image: '/my_portfolio/2.png',
     },
     {
-      image: '3.png',
+      image: '/my_portfolio/3.png',
     },
     {
-      image: '4.png',
+      image: '/my_portfolio/4.png',
     },
     {
-      image: '5.png',
+      image: '/my_portfolio/5.png',
     },
     {
-      image: '6.png',
+      image: '/my_portfolio/6.png',
     },
   ];
   return (
