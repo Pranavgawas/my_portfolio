@@ -7,7 +7,7 @@ function Welcome() {
   return (
     <div className="container-welcome">
       <div className='heading'>My Information</div>
-      <div className='sub-heading'>Education</div>
+      <div id="education" className='sub-heading' >Education</div>
 
           <div className="card1">
             <div className="card-content">
@@ -62,7 +62,7 @@ function Welcome() {
             </div>
           </div>
 
-      <div className='sub-heading'>Projects</div>
+      <div id="project" className='sub-heading'>Projects</div>
 
         <div className="card1">
             <div className="card-content">
@@ -76,8 +76,6 @@ function Welcome() {
                 customized cars
                 - Generated invoices in PDF format based on the configuration and emailed them to the client
                 - Utilized multiple technologies including MicroServices and Docker to enhance website performance and scalability.
-                <br />
-                My CDAC DAC Project Frontend (React) Deploy link : <a href=''>Vehicle configurator</a>
             </p>
             </div>
           </div>
@@ -96,13 +94,12 @@ function Welcome() {
                 easily cut the sheet metal
                 - Successfully demonstrated the machine's functionality by activating the air compressor, precisely 
                 controlling the piston movement, and achieving accurate sheet metal cuts.
-                <br />
-                My Mechanical Final Project 3D Model Link : <a href=''>Pneumatic Sheet Metal Cutting Machine</a>
+
               </p>
             </div>
           </div>
 
-      <div className='sub-heading'>Skills</div>
+      <div id="skills" className='sub-heading'>Skills</div>
 
         <div className="card1">
             <div className="card-content">

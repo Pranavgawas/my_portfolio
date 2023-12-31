@@ -1,41 +1,83 @@
 /* Footer.css */
 
-/* Style for the footer */
+/* Default styling for the footer */
 footer {
-    background-image: url('https://wallpapers.com/images/hd/dark-mountain-4k-3vxidfa2y5t5uk4m.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    padding: 20px 0;
+  background-image: url('https://w0.peakpx.com/wallpaper/849/62/HD-wallpaper-firewatch-sunrise-minimal.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 20px 0;
+}
+
+/* Default styling for the social icons */
+.social-icons a {
+  color: #000; /* Icon color */
+  margin-right: 15px; /* Adjust the space between icons */
+  font-size: 24px; /* Adjust the icon size */
+}
+
+/* Default styling for the social icon links on hover */
+.social-icons a:hover {
+  color: #ffcc00; /* Change color on hover */
+}
+
+/* Default styling for the contact information */
+h4 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #000; /* Link color */
+}
+
+a:hover {
+  color: #ffcc00; /* Change link color on hover */
+}
+
+/* Responsive adjustments for smaller screens */
+@media only screen and (max-width: 767px) {
+  footer {
+    padding: 10px 0; /* Adjust the padding for smaller screens */
   }
-  
-  /* Style for the social icons */
+
   .social-icons a {
-    color: #000; /* Icon color */
-    margin-right: 15px; /* Adjust the space between icons */
-    font-size: 24px; /* Adjust the icon size */
+    font-size: 18px; /* Adjust the icon size for smaller screens */
   }
-  
-  /* Style for the social icon links on hover */
-  .social-icons a:hover {
-    color: #ffcc00; /* Change color on hover */
-  }
-  
-  /* Style for the contact information */
+
   h4 {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Adjust the font size for headings on smaller screens */
   }
-  
+
   p {
-    font-size: 1rem;
-    margin-bottom: 10px;
+    font-size: 0.9rem; /* Adjust the font size for paragraphs on smaller screens */
   }
-  
-  a {
-    color: #000; /* Link color */
+}
+
+/* Responsive adjustments for medium screens */
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  footer {
+    padding: 15px 0; /* Adjust the padding for medium-sized screens */
   }
-  
-  a:hover {
-    color: #ffcc00; /* Change link color on hover */
+
+  .social-icons a {
+    font-size: 20px; /* Adjust the icon size for medium-sized screens */
   }
-  
+
+  h4 {
+    font-size: 1.4rem; /* Adjust the font size for headings on medium-sized screens */
+  }
+
+  p {
+    font-size: 1rem; /* Maintain the font size for paragraphs on medium-sized screens */
+  }
+}
+
+/* Additional media queries for larger screens if needed */
+@media only screen and (min-width: 1200px) {
+  /* Add adjustments for larger screens here if needed */
+}

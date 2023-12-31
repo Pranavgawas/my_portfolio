@@ -8,8 +8,10 @@ function Footer() {
   return (
     <footer className="bg-dark text-light py-4">
       <Container>
+      <div id="connect">
         <Row>
           <Col lg={6}>
+            
             <h4>Contact Me</h4>
             <p>
               Feel free to reach out to us if you have any questions or concerns.
@@ -33,6 +35,7 @@ function Footer() {
             </div>
           </Col>
         </Row>
+        </div>
       </Container>
     </footer>
   );

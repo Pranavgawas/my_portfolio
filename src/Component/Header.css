@@ -1,24 +1,63 @@
 /* Header.css */
 
-/* Customize the background image of the navbar */
+/* Default styles for the navbar */
 .navbar-custom {
-    background-image: url('https://wallpapercave.com/wp/wp4995644.jpg');
-    background-size: cover;
-    background-position: center;
+  background-image: url('https://w0.peakpx.com/wallpaper/849/62/HD-wallpaper-firewatch-sunrise-minimal.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+
+.my-img img {
+  border-radius: 50%;
+}
+
+
+/* Default styles for the brand/logo text color */
+.navbar-custom .navbar-brand {
+  color: #fff;
+}
+
+/* Default styles for the links text color */
+.navbar-custom .nav-link {
+  color: #fff;
+}
+
+/* Default styles for the text color on hover */
+.navbar-custom .nav-link:hover {
+  color: #ffcc00;
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media only screen and (max-width: 767px) {
+  /* Adjust the background image and text color for smaller screens */
+  .navbar-custom {
+    background-size: cover; /* Use cover for smaller screens */
   }
-  
-  /* Customize the text color of the brand/logo */
-  .navbar-custom .navbar-brand {
-    color: #fff;
-  }
-  
-  /* Customize the text color of the links */
+
+  .navbar-custom .navbar-brand,
   .navbar-custom .nav-link {
-    color: #fff;
+    color: #000; /* Adjust text color for smaller screens */
   }
-  
-  /* Customize the text color on hover */
+
   .navbar-custom .nav-link:hover {
-    color: #ffcc00;
+    color: #ffcc00; /* Adjust text color on hover for smaller screens */
   }
-  
+}
+
+/* Additional media queries for other responsive adjustments if needed */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* Adjustments for devices like iPhone SE */
+  .navbar-custom {
+    background-size: contain; /* Optional: Adjust background size for iPhone SE */
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* Add adjustments for medium-sized screens here if needed */
+}
+
+@media only screen and (min-width: 1200px) {
+  /* Add adjustments for larger screens here if needed */
+}
