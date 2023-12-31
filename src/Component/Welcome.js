@@ -6,12 +6,12 @@ import './Welcome.css';
 function Welcome() {
   return (
     <div className="container-welcome">
-      <h2>My Information</h2>
-      <h3>Education</h3>
+      <div className='heading'>My Information</div>
+      <div className='sub-heading'>Education</div>
 
           <div className="card1">
             <div className="card-content">
-              <h2>CDAC</h2>
+              <h3>CDAC</h3>
               <p>
                 Skills Learned: Java, .NET Framework, Web Technologies, Databases • Grade: 62%
               </p>
@@ -37,7 +37,7 @@ function Welcome() {
 
         <div className="card2">
             <div className="card-content">
-              <h2>Bachlor of Engineering</h2>
+              <h3>Bachlor of Engineering</h3>
               <p>
                 Mechanical Engineering • Grade: 67.02%
                 </p>
@@ -62,11 +62,11 @@ function Welcome() {
             </div>
           </div>
 
-      <h3>Projects</h3>
+      <div className='sub-heading'>Projects</div>
 
         <div className="card1">
             <div className="card-content">
-              <h2>Vehicle Configurator</h2>
+              <h3>Vehicle Configurator</h3>
               <p>
                 - Developed a B2B portal for a Car Leasing Company using Spring 6, Maven 3, Spring boot 3, REST 
                 API, MySQL 8, JPA, JUnit 4, JWT, MicroService, Docker, Web API Core, SQL Server, Entity Core, and 
@@ -76,13 +76,15 @@ function Welcome() {
                 customized cars
                 - Generated invoices in PDF format based on the configuration and emailed them to the client
                 - Utilized multiple technologies including MicroServices and Docker to enhance website performance and scalability.
+                <br />
+                My CDAC DAC Project Frontend (React) Deploy link : <a href=''>Vehicle configurator</a>
             </p>
             </div>
           </div>
 
         <div className="card2">
             <div className="card-content">
-              <h2>Pneumatic Sheet Metal Cutting Machine</h2>
+              <h3>Pneumatic Sheet Metal Cutting Machine</h3>
               <p>
                 - Designed and constructed a pneumatic sheet metal shearing machine capable of effortlessly 
                 cutting .5mm to 1mm thick sheets
@@ -94,45 +96,47 @@ function Welcome() {
                 easily cut the sheet metal
                 - Successfully demonstrated the machine's functionality by activating the air compressor, precisely 
                 controlling the piston movement, and achieving accurate sheet metal cuts.
+                <br />
+                My Mechanical Final Project 3D Model Link : <a href=''>Pneumatic Sheet Metal Cutting Machine</a>
               </p>
             </div>
           </div>
 
-      <h3>Skills</h3>
+      <div className='sub-heading'>Skills</div>
 
         <div className="card1">
             <div className="card-content">
-              <h2>JAVA</h2>
+              <h4>JAVA</h4>
             </div>
           </div>
 
         <div className="card2">
             <div className="card-content">
-              <h2>JAKARTA</h2>
+              <h4>JAKARTA</h4>
             </div>
           </div>
 
         <div className="card1">
             <div className="card-content">
-              <h2>DOTNET(C#)</h2>
+              <h4>DOTNET(C#)</h4>
             </div>
           </div>
 
         <div className="card2">
             <div className="card-content">
-              <h2>REACT</h2>
+              <h4>REACT</h4>
             </div>
           </div>
 
         <div className="card1">
             <div className="card-content">
-              <h2>JAVASCRIPT</h2>
+              <h4>JAVASCRIPT</h4>
             </div>
           </div>
  
         <div className="card2">
             <div className="card-content">
-              <h2>MYSQL</h2>
+              <h4>MYSQL</h4>
             </div>
           </div>
 
