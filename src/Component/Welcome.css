@@ -33,3 +33,49 @@
 .card-content {
   color: #fff; /* Set text color to white */
 }
+
+
+.heading,
+.sub-heading {
+  background-image: url('https://tse1.mm.bing.net/th?id=OIP.KYYQxk2JjTvZ31nt16hXpQHaEo&pid=Api&P=0&h=180');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  border: 1px solid #ccc;
+  color: #fff;
+  font-weight: bold;
+
+  margin: auto; /* Center the card horizontally */
+  text-align: center; /* Center the text within the card */
+  margin-bottom: 40px; /* Add space between the cards */
+}
+
+.heading:hover,
+.sub-heading:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* If you want to set a specific height for the heading and sub-heading, you can add the following */
+.heading,
+.sub-heading {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading{
+  height: 200px;
+  width: 400px;
+  font-size: 35px;
+}
+
+.sub-heading{
+  height: 150px;
+  width: 350px;
+  font-size: 25px;
+}

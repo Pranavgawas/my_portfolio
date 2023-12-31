@@ -10,7 +10,7 @@ function Footer() {
       <Container>
         <Row>
           <Col lg={6}>
-            <h4>Contact Us</h4>
+            <h4>Contact Me</h4>
             <p>
               Feel free to reach out to us if you have any questions or concerns.
             </p>
@@ -18,11 +18,11 @@ function Footer() {
               Email: <a href="mailto:pranavgawas1999@gmail.com">pranavgawas1999@gmail.com</a>
             </p>
             <p>
-              Phone: +91 9284630996 
+              Phone: <a href ="**********"> +91 ********** </a>
             </p>
           </Col>
           <Col lg={6}>
-          <h4>Follow Us</h4>
+          <h4>Follow Me</h4>
             <div className="social-icons">
               <a href="https://www.linkedin.com/in/pranavgawas/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
               <a href="https://github.com/Pranavgawas/" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
