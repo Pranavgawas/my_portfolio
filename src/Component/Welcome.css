@@ -1,12 +1,8 @@
-/* Welcome.css */
-
-/* Default styles for the container */
 .container-welcome {
   text-align: center;
   margin: 20px;
 }
 
-/* Default styles for the cards */
 .card,
 .card1,
 .card2 {
@@ -36,7 +32,6 @@
   color: #fff;
 }
 
-/* Default styles for heading and sub-heading */
 .heading,
 .sub-heading {
   border: 1px solid #ddd;
@@ -59,7 +54,6 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Header background image */
 .heading {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpxDMiMtI8nmmbTv8jxMT2vXDk17weeJvXQmTF9aL8PU-91q-LyvnhZqVKV-w6oua1bJQ'); /* Replace with your header image path or URL */
   height: 200px;
@@ -75,7 +69,6 @@
   font-size: 25px;
 }
 
-/* Responsive adjustments for smaller screens */
 @media only screen and (max-width: 767px) {
   .card1,
   .card2 {
@@ -94,13 +87,4 @@
     width: 250px;
     font-size: 20px;
   }
-}
-
-/* Additional media queries for other responsive adjustments if needed */
-@media only screen and (min-width: 768px) and (max-width: 1199px) {
-  /* Add adjustments for medium-sized screens here if needed */
-}
-
-@media only screen and (min-width: 1200px) {
-  /* Add adjustments for larger screens here if needed */
 }

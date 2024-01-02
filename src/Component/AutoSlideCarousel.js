@@ -1,8 +1,6 @@
-// AutoSlideCarousel.js
-
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import './AutoSlideCarousel.css'; // Import the custom CSS file
+import './AutoSlideCarousel.css'; 
 
 const AutoSlideCarousel = ({ items, interval = 3000 }) => {
   const [index, setIndex] = useState(0);
@@ -11,7 +9,6 @@ const AutoSlideCarousel = ({ items, interval = 3000 }) => {
     setIndex(selectedIndex);
   };
 
-  // Automatically advance to the next slide after the specified interval
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % items.length);

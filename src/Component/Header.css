@@ -1,6 +1,3 @@
-/* Header.css */
-
-/* Default styles for the navbar */
 .navbar-custom {
   background-image: url('https://w0.peakpx.com/wallpaper/849/62/HD-wallpaper-firewatch-sunrise-minimal.jpg');
   background-size: cover;
@@ -13,51 +10,36 @@
 }
 
 
-/* Default styles for the brand/logo text color */
 .navbar-custom .navbar-brand {
   color: #fff;
 }
 
-/* Default styles for the links text color */
 .navbar-custom .nav-link {
   color: #fff;
 }
 
-/* Default styles for the text color on hover */
 .navbar-custom .nav-link:hover {
   color: #ffcc00;
 }
 
-
-/* Responsive adjustments for smaller screens */
+/
 @media only screen and (max-width: 767px) {
-  /* Adjust the background image and text color for smaller screens */
   .navbar-custom {
-    background-size: cover; /* Use cover for smaller screens */
+    background-size: cover; 
   }
 
   .navbar-custom .navbar-brand,
   .navbar-custom .nav-link {
-    color: #000; /* Adjust text color for smaller screens */
+    color: #000; 
   }
 
   .navbar-custom .nav-link:hover {
-    color: #ffcc00; /* Adjust text color on hover for smaller screens */
+    color: #ffcc00; 
   }
 }
 
-/* Additional media queries for other responsive adjustments if needed */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* Adjustments for devices like iPhone SE */
   .navbar-custom {
-    background-size: contain; /* Optional: Adjust background size for iPhone SE */
+    background-size: contain; 
   }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* Add adjustments for medium-sized screens here if needed */
-}
-
-@media only screen and (min-width: 1200px) {
-  /* Add adjustments for larger screens here if needed */
 }
