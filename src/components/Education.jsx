@@ -1,6 +1,34 @@
 import React from "react";
 
 function Education() {
+  const handleSSC = () => {
+    window.open(
+      "https://drive.google.com/file/d/15tLxsuEP7iLYpplfIJ23ek4UZyLEBZOY/view",
+      "_blank"
+    );
+  };
+
+  const handleHSC = () => {
+    window.open(
+      "https://drive.google.com/file/d/15tYoysi-PbRoaUBWa3a8qaQyGP2xowe4/view",
+      "_blank"
+    );
+  };
+
+  const handleBE = () => {
+    window.open(
+      "https://drive.google.com/file/d/167HtW4NLlNU7zfnW2mXt5lOmv6JSGt78/view",
+      "_blank"
+    );
+  };
+
+    const handleCDAC = () => {
+    window.open(
+      "https://drive.google.com/file/d/1ANIcv-Imh9mUH-P-gaGAohzxCsaBspN6/view",
+      "_blank"
+    );
+  };
+
   return (
     <div id="educationId">
       <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
@@ -21,7 +49,7 @@ function Education() {
           </div>
           <div className="timeline-start md:text-end mb-10">
             <time className="font-mono italic">2015</time>
-            <div className="text-lg font-black">SSC (10th)</div>
+            <div className="text-lg font-black link link-hover" onClick={handleSSC}>SSC (10th)</div>
             <ul>• Percentage : 86.40</ul>
             <ul>• Passed with Distinction</ul>
           </div>
@@ -45,7 +73,7 @@ function Education() {
           </div>
           <div className="timeline-end mb-10">
             <time className="font-mono italic">2017</time>
-            <div className="text-lg font-black">HSC (Science) (12th)</div>
+            <div className="text-lg font-black link link-hover" onClick={handleHSC}>HSC (Science) (12th)</div>
             <ul>• Percentage : 60.76</ul>
             <ul>• Passed with First Division</ul>
             <ul>• Specialised in Physics, Chemistry, Biology and Maths</ul>
@@ -70,7 +98,7 @@ function Education() {
           </div>
           <div className="timeline-start md:text-end mb-10">
             <time className="font-mono italic">2021</time>
-            <div className="text-lg font-black">
+            <div className="text-lg font-black link link-hover" onClick={handleBE}>
               Bachelor of Engineering (Mechanical)
             </div>
             <ul>• Percentage : 67.02</ul>
@@ -100,7 +128,7 @@ function Education() {
           </div>
           <div className="timeline-end mb-10">
             <time className="font-mono italic">2023</time>
-            <div className="text-lg font-black">
+            <div className="text-lg font-black link link-hover" onClick={handleCDAC}>
               Centre for Development of Advanced Computing (C-DAC)
             </div>
             <ul>• Percentage : 58.13</ul>

@@ -16,7 +16,7 @@ function ProgrammingSkills() {
         </figure>
         <div className="card-body">
           <h2 className="card-title">Java</h2>
-          <p>Java Language is best many people thought</p>
+          <p>Java, Jakarta EE, Spring Boot, JPA, Hibernet etc.</p>
         </div>
       </div>
       <div className="card bg-base-100 shadow-xl image-full">
@@ -25,7 +25,7 @@ function ProgrammingSkills() {
         </figure>
         <div className="card-body">
           <h2 className="card-title">.NET</h2>
-          <p>.NET Language is best many people thought</p>
+          <p>NET (C#), Blazor, Entity Core, ADO.NET, ASP.NET MVC, LINQ.</p>
         </div>
       </div>
       <div className="card bg-base-100 shadow-xl image-full">
@@ -34,7 +34,7 @@ function ProgrammingSkills() {
         </figure>
         <div className="card-body">
           <h2 className="card-title">JavaScript</h2>
-          <p>JavaScript Language is best many people thought</p>
+          <p>JavaScript, React, jQuery, Node.js.</p>
         </div>
       </div>
       <div className="card bg-base-100 shadow-xl image-full">
@@ -43,7 +43,7 @@ function ProgrammingSkills() {
         </figure>
         <div className="card-body">
           <h2 className="card-title">React</h2>
-          <p>React Language is best many people thought</p>
+          <p>React, Bootstrap, React Bootstrap, HTML, CSS, Tailwind CSS.</p>
         </div>
       </div>
       <div className="card bg-base-100 shadow-xl image-full">
@@ -52,7 +52,7 @@ function ProgrammingSkills() {
         </figure>
         <div className="card-body">
           <h2 className="card-title">MySQL</h2>
-          <p>MySQL Language is best many people thought</p>
+          <p>MySQL.</p>
         </div>
       </div>
     </div>

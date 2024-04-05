@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import image from "../assets/image.json";
 
 function Navbar() {
   const avatarUrl = image["avatar"];
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
   const projectScroll = (id) => {
     const element = document.getElementById(id);
@@ -79,7 +96,9 @@ function Navbar() {
             </li>
 
             <li>
-              <a onClick={() => certificateScroll("certificateId")}>Certificate</a>
+              <a onClick={() => certificateScroll("certificateId")}>
+                Certificate
+              </a>
             </li>
           </ul>
         </div>
@@ -147,6 +166,8 @@ function Navbar() {
             type="checkbox"
             value="synthwave"
             className="toggle theme-controller"
+            onChange={handleToggle}
+            checked={theme === "dark" ? true : false}
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"

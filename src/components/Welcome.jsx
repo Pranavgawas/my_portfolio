@@ -10,7 +10,7 @@ import Hero from "./Hero.jsx";
 
 function Welcome() {
   return (
-    <div data-theme="dracula">
+    <div>
       <Navbar />
       <Hero />
       <Divider />
@@ -20,7 +20,6 @@ function Welcome() {
       <h1 className="mb-4 text-4xl font-bold">Education :</h1>
       <Education />
       <Divider />
-      <h1 className="mb-4 text-4xl font-bold">Skills :</h1>
       <Skills />
       <Divider />
       <h1 className="mb-4 text-4xl font-bold">Certifications and Badges :</h1>

@@ -16,7 +16,7 @@ function Hero() {
   <div className="hero-content text-center text-neutral-content">
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Hello there, welcome to my Portfolio Website!</h1>
-      <p className="mb-5">I'm Pranav Gawas, a full-stack developer. I recently completed my CDAC, where I delved into various technologies such as Java, .NET, MySQL, and JavaScript. Besides mastering these, I'm continuously exploring new technologies to enhance my skills. I've also applied these skills to create some exciting projects, which you can explore below. Thank you for visiting!</p>
+      <p className="mb-5">"I'm Pranav Gawas, a full-stack developer. I completed my CDAC, where I delved into various technologies such as Java, Jakarta EE, Spring Boot, .NET (C#), LINQ, MySQL, SQL Server, JavaScript, React, jQuery, Node.js, HTML/CSS, C, C++, etc. Besides mastering these, I'm continuously exploring new technologies to enhance my skills. I've also applied these skills to create some exciting projects, which you can explore below. Thank you for visiting!"</p>
       <button className="btn btn-primary" onClick={() => projectScroll("projectId")}>Get Started</button>
     </div>
   </div>
