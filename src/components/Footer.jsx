@@ -2,27 +2,22 @@ import React from "react";
 
 function Footer() {
   const handleTwitter = () => {
-    alert("hello");
     window.open("https://twitter.com/PranavGawas1999", "_blank");
   };
 
   const handleGitHub = () => {
-    alert("hello");
     window.open("https://github.com/Pranavgawas/", "_blank");
   };
 
   const handleFacebook = () => {
-    alert("hello");
     window.open("https://www.facebook.com/pranav.b.gawas.5/", "_blank");
   };
 
   const handleLinkedin = () => {
-    alert("hello");
     window.open("https://www.linkedin.com/in/pranavgawas/", "_blank");
   };
 
   const handleInstagram = () => {
-    alert("hello");
     window.open("https://www.instagram.com/_pranav_gawas_/", "_blank");
   };
 
