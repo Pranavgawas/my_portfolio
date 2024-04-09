@@ -7,6 +7,7 @@ import Skills from "./Skills.jsx";
 import Divider from "./Divider.jsx";
 import Certification from "./Certification.jsx";
 import Hero from "./Hero.jsx";
+import Resume from "./Resume.jsx";
 
 function Welcome() {
   return (
@@ -24,6 +25,9 @@ function Welcome() {
       <Divider />
       <h1 className="mb-4 text-4xl font-bold">Certifications and Badges :</h1>
       <Certification />
+      <Divider />
+      <h1 className="mb-4 text-4xl font-bold">Resume :</h1>
+      <Resume />
       <Divider />
       <Footer />
     </div>
