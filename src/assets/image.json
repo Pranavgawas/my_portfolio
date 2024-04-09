@@ -1,10 +1,16 @@
 {
     "avatar": "https://avatars.githubusercontent.com/u/133587944?v=4",
+
     "vehicleconfig": "https://miro.medium.com/v2/resize:fit:2000/format:webp/1*wJnOteFjQ7Z0YGqIJwMVqQ.png",
+    "feeds": "https://c0.wallpaperflare.com/preview/260/841/181/concept-development-device-flat.jpg",
+    "CertifyMe": "https://www.wordstream.com/wp-content/uploads/2022/07/website-examples-feature.jpg",
+    "EmployeeDetails":"https://cdn.dribbble.com/users/9295020/screenshots/18864960/media/845e83c017825cc2e49a1a88022c9c2e.jpg?resize=400x0",
+    "CadScript": "https://png.pngtree.com/thumb_back/fh260/background/20220523/pngtree-blueprint-cad-construction-architect-background-image_1397262.jpg",
+
+    "hero":"https://wallpapercave.com/wp/wp5076799.jpg",
+
     "java":"https://cdn.wallpapersafari.com/89/85/2rZciQ.png",
     "dotnet":"https://wallpapercave.com/wp/wp10272163.jpg",
-    "hero":"https://wallpapercave.com/wp/wp5076799.jpg",
-    "feeds": "https://c0.wallpaperflare.com/preview/260/841/181/concept-development-device-flat.jpg",
     "javascript": "https://c4.wallpaperflare.com/wallpaper/966/672/905/javascript-minimalism-wallpaper-preview.jpg",
     "react": "https://c4.wallpaperflare.com/wallpaper/294/834/442/reactjs-facebook-javascript-minimalism-wallpaper-preview.jpg",
     "mysql": "https://wallpapercave.com/wp/wp7551846.png",
@@ -12,6 +18,7 @@
     "git": "https://c4.wallpaperflare.com/wallpaper/451/610/509/technology-git-wallpaper-preview.jpg",
     "kubernetes": "https://e1.pxfuel.com/desktop-wallpaper/646/807/desktop-wallpaper-kubernetes.jpg",
     "bash": "https://c4.wallpaperflare.com/wallpaper/396/50/367/linux-command-lines-unix-bash-grey-hd-wallpaper-preview.jpg",
+
     "HardwareAndNetworking": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUbGpw5DFA6MCzk27LXUn8wJsuYVYEcp8ECEGNNfMlaQ&s",
     "Precat": "https://cache.careers360.mobi/media/presets/860X430/article_images/2020/8/21/CDAC-C-CAT-Result.webp",
     "HackerRank": "https://5.imimg.com/data5/SELLER/Default/2023/10/354785340/GA/BS/CK/63475444/hackerrank-software.png",
