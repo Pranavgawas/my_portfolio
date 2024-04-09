@@ -12,7 +12,7 @@ function Projects() {
   const CertifyMeURL = image["CertifyMe"];
   const EmployeeDetailsURL = image["EmployeeDetails"];
   const CadScriptURL = image["CadScript"];
-  
+
   return (
     <div
       id="projectId"
@@ -61,6 +61,17 @@ function Projects() {
             Technologies used: React, JavaScript, Tailwind CSS.
           </p>
           <div className="card-actions justify-end">
+          <button
+              className="btn btn-primary mr-2"
+              onClick={() => {
+                window.open(
+                  "hhttps://certify-me-liart.vercel.app/",
+                  "_blank"
+                );
+              }}
+            >
+              View Website
+            </button>
             <CertifyMeModal />
           </div>
         </div>
@@ -76,6 +87,17 @@ function Projects() {
             Technologies used: React, JavaScript, MongoDB, Express.js, Node.js.
           </p>
           <div className="card-actions justify-end">
+          <button
+              className="btn btn-primary mr-2"
+              onClick={() => {
+                window.open(
+                  "https://employee-details-management.onrender.com/",
+                  "_blank"
+                );
+              }}
+            >
+              View Website
+            </button>
             <EmployeeDetailsModal />
           </div>
         </div>
@@ -91,6 +113,17 @@ function Projects() {
             Technologies used: React, JavaScript, Tailwind CSS.
           </p>
           <div className="card-actions justify-end">
+            <button
+              className="btn btn-primary mr-2"
+              onClick={() => {
+                window.open(
+                  "https://cad-script.vercel.app/",
+                  "_blank"
+                );
+              }}
+            >
+              View Website
+            </button>
             <CadScriptModal />
           </div>
         </div>
