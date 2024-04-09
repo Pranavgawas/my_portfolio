@@ -65,7 +65,7 @@ function Projects() {
               className="btn btn-primary mr-2"
               onClick={() => {
                 window.open(
-                  "hhttps://certify-me-liart.vercel.app/",
+                  "https://certify-me-liart.vercel.app/",
                   "_blank"
                 );
               }}
