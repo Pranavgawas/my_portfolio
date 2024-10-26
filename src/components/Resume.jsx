@@ -7,7 +7,7 @@ function Resume() {
         className="btn btn-primary mr-2"
         onClick={() => {
           window.open(
-            "https://drive.google.com/file/d/1JaLrd995W4eKhudC_pJvZaLMj8kJAMpg/view",
+            "https://drive.google.com/file/d/136jZTm-Lmt8Y-HGIwTCGK40gUHHeRpKG/view?usp=sharing",
             "_blank"
           );
         }}
