@@ -10,7 +10,10 @@ function VehicleConfigModel() {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={vehicleConfigModal}>
+      <button 
+        className="btn btn-primary btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base font-medium" 
+        onClick={vehicleConfigModal}
+      >
         Learn More!
       </button>
       <dialog id="vehicleConfig" className="modal modal-bottom sm:modal-middle">
@@ -45,10 +48,10 @@ function VehicleConfigModel() {
             </ul>
           </p>
 
-          <div className="modal-action">
-            <form method="dialog">
-            <button
-                className="btn mr-2"
+          <div className="modal-action flex flex-wrap gap-2 sm:gap-3">
+            <form method="dialog" className="flex flex-wrap gap-2 sm:gap-3 w-full">
+              <button
+                className="btn btn-outline btn-sm sm:btn-md min-h-[44px] px-3 sm:px-4 text-xs sm:text-sm flex-1 sm:flex-none"
                 onClick={() => {
                   window.open(
                     "https://github.com/Pranavgawas/VehicleConfigurator",
@@ -56,10 +59,10 @@ function VehicleConfigModel() {
                   );
                 }}
               >
-                View java Code
+                View Java Code
               </button>
               <button
-                className="btn mr-2"
+                className="btn btn-outline btn-sm sm:btn-md min-h-[44px] px-3 sm:px-4 text-xs sm:text-sm flex-1 sm:flex-none"
                 onClick={() => {
                   window.open(
                     "https://github.com/Pranavgawas/DotnetVehicleConfigurator",
@@ -70,7 +73,7 @@ function VehicleConfigModel() {
                 View .NET Code
               </button>
               <button
-                className="btn mr-2"
+                className="btn btn-outline btn-sm sm:btn-md min-h-[44px] px-3 sm:px-4 text-xs sm:text-sm flex-1 sm:flex-none"
                 onClick={() => {
                   window.open(
                     "https://github.com/Pranavgawas/VehicleConfiguratorFrontEnd",
@@ -81,7 +84,7 @@ function VehicleConfigModel() {
                 View React Code
               </button>
               <button
-                className="btn btn-primary mr-2"
+                className="btn btn-primary btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base w-full sm:w-auto mt-2 sm:mt-0"
                 onClick={(e) => {
                   e.preventDefault();
                   const modal = document.getElementById("vehicleConfig");

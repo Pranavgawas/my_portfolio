@@ -8,26 +8,55 @@ import Divider from "./Divider.jsx";
 import Certification from "./Certification.jsx";
 import Hero from "./Hero.jsx";
 import Resume from "./Resume.jsx";
+import AnimatedSection from "./AnimatedSection.jsx";
 
 function Welcome() {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
       <Hero />
       <Divider />
-      <h1 className="mb-4 text-4xl font-bold">Projects :</h1>
-      <Projects />
+      <AnimatedSection animation="fadeInUp" delay={200}>
+        <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <h1 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center sm:text-left">
+            Projects :
+          </h1>
+          <Projects />
+        </section>
+      </AnimatedSection>
       <Divider />
-      <h1 className="mb-4 text-4xl font-bold">Education :</h1>
-      <Education />
+      <AnimatedSection animation="fadeInUp" delay={100}>
+        <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <h1 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center sm:text-left">
+            Education :
+          </h1>
+          <Education />
+        </section>
+      </AnimatedSection>
       <Divider />
-      <Skills />
+      <AnimatedSection animation="fadeInUp" delay={150}>
+        <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <Skills />
+        </section>
+      </AnimatedSection>
       <Divider />
-      <h1 className="mb-4 text-4xl font-bold">Certifications and Badges :</h1>
-      <Certification />
+      <AnimatedSection animation="fadeInUp" delay={100}>
+        <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <h1 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center sm:text-left">
+            Certifications and Badges :
+          </h1>
+          <Certification />
+        </section>
+      </AnimatedSection>
       <Divider />
-      <h1 className="mb-4 text-4xl font-bold">Resume :</h1>
-      <Resume />
+      <AnimatedSection animation="fadeInUp" delay={100}>
+        <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <h1 className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center sm:text-left">
+            Resume :
+          </h1>
+          <Resume />
+        </section>
+      </AnimatedSection>
       <Divider />
       <Footer />
     </div>
