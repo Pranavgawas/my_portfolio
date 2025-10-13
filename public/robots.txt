@@ -1,10 +1,13 @@
+# Robots.txt for Pranav Gawas Portfolio
+# Allow all search engines to crawl the site
+
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap location (Update with your actual domain)
 Sitemap: https://your-portfolio-domain.com/sitemap.xml
 
-# Block access to source files and configurations
+# Block access to source files, configurations, and build files
 Disallow: /src/
 Disallow: /*.jsx
 Disallow: /*.js.map
@@ -13,8 +16,10 @@ Disallow: /.git/
 Disallow: /package.json
 Disallow: /vite.config.js
 Disallow: /tailwind.config.js
+Disallow: /postcss.config.js
+Disallow: /.env
 
-# Allow important files
+# Allow important public files
 Allow: /assets/
 Allow: /images/
 Allow: /*.css
@@ -25,6 +30,20 @@ Allow: /*.jpeg
 Allow: /*.gif
 Allow: /*.svg
 Allow: /*.webp
+Allow: /*.ico
 
-# Crawl delay (optional - be respectful)
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl delay (be respectful to servers)
 Crawl-delay: 1

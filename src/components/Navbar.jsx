@@ -18,14 +18,27 @@ function Navbar() {
 
   // Track active section on scroll
   useEffect(() => {
+    let timeoutId = null;
+    
     const handleScroll = () => {
-      setActiveSection(getCurrentSection());
+      // Debounce scroll events for better performance
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      
+      timeoutId = setTimeout(() => {
+        const currentSection = getCurrentSection();
+        setActiveSection(currentSection);
+      }, 50); // 50ms debounce
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Check initial state
 
     return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);

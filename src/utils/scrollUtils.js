@@ -22,17 +22,36 @@ export const getSectionIds = () => {
   return ['hero', 'projectId', 'educationId', 'skillsId', 'certificateId', 'contactId'];
 };
 
-// Check which section is currently in view
+// Check which section is currently in view with improved accuracy
 export const getCurrentSection = () => {
   const sections = getSectionIds();
-  const scrollPosition = window.scrollY + 100; // Offset for navbar
-
+  const scrollPosition = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const navbarHeight = 80; // Height of sticky navbar
+  
+  // Calculate the middle of the viewport for better detection
+  const viewportMiddle = scrollPosition + (windowHeight / 3) + navbarHeight;
+  
+  // Find the section that contains the viewport middle
   for (let i = sections.length - 1; i >= 0; i--) {
     const section = document.getElementById(sections[i]);
-    if (section && section.offsetTop <= scrollPosition) {
-      return sections[i];
+    if (section) {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      
+      // Check if viewport middle is within this section
+      if (viewportMiddle >= sectionTop && viewportMiddle < sectionBottom) {
+        return sections[i];
+      }
     }
   }
+  
+  // If at the very top, return hero
+  if (scrollPosition < 100) {
+    return 'hero';
+  }
+  
+  // Fallback to first section
   return sections[0];
 };
 

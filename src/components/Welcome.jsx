@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar.jsx";
 import Projects from "./Projects.jsx";
-import Education from "./Education.jsx";
+import EducationEnhanced from "./EducationEnhanced.jsx";
 import Footer from "./Footer.jsx";
 import Skills from "./Skills.jsx";
 import Divider from "./Divider.jsx";
@@ -45,7 +45,7 @@ function Welcome() {
                 My academic journey and qualifications
               </p>
             </div>
-            <Education />
+            <EducationEnhanced />
           </section>
         </AnimatedSection>
         <Divider />
