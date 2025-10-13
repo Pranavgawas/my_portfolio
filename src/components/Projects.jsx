@@ -1,42 +1,41 @@
 import React, { useState, useEffect } from "react";
-import image from "../assets/image.json";
 import VehicleConfigModel from "./Modal/VehicleConfigModel";
 import FeedModel from "./Modal/FeedModel";
 import CertifyMeModal from "./Modal/CertifyMeModal";
 import EmployeeDetailsModal from "./Modal/EmployeeDetailsModal";
 import CadScriptModal from "./Modal/CadScriptModal";
-import SmartImage from "./SmartImage";
 import AnimatedSection from "./AnimatedSection";
 import { SkeletonCard } from "./SkeletonLoaders";
+import { Car, MessageSquare, Award, Users, FileCode, ExternalLink, Code2 } from "lucide-react";
 
 function Projects() {
   const [loading, setLoading] = useState(true);
-  
-  const vehicleconfigURL = image["vehicleconfig"];
-  const feedsURL = image["feeds"];
-  const CertifyMeURL = image["CertifyMe"];
-  const EmployeeDetailsURL = image["EmployeeDetails"];
-  const CadScriptURL = image["CadScript"];
 
   const projects = [
     {
       title: "Vehicle Configurator",
-      description: "Technologies used: Spring 6, Maven 3, Spring Boot 3, REST API, MySQL 8, JPA, JUnit 4, JWT, Microservices, Docker, Web API Core, SQL Server, and Entity Core.",
-      image: vehicleconfigURL,
+      description: "Full-stack microservices application for vehicle customization with JWT authentication and Docker deployment.",
+      technologies: ["Spring Boot 3", "REST API", "MySQL 8", "JPA", "JWT", "Microservices", "Docker", ".NET Core", "SQL Server"],
+      icon: Car,
+      gradient: "from-blue-500 to-cyan-500",
       modal: VehicleConfigModel,
       buttons: []
     },
     {
       title: "Feed App", 
-      description: "Technologies used: Spring 6, Maven 3, Spring Boot 3, REST API, MySQL 8, JPA, React, Javascript.",
-      image: feedsURL,
+      description: "Social media feed application with real-time updates, featuring a modern React frontend and Spring Boot backend.",
+      technologies: ["Spring Boot 3", "REST API", "MySQL 8", "JPA", "React", "Javascript"],
+      icon: MessageSquare,
+      gradient: "from-purple-500 to-pink-500",
       modal: FeedModel,
       buttons: []
     },
     {
       title: "CertifyMe",
-      description: "Technologies used: React, JavaScript, Tailwind CSS.",
-      image: CertifyMeURL,
+      description: "Certificate generation and management platform with beautiful UI and responsive design.",
+      technologies: ["React", "JavaScript", "Tailwind CSS"],
+      icon: Award,
+      gradient: "from-green-500 to-emerald-500",
       modal: CertifyMeModal,
       buttons: [
         {
@@ -47,8 +46,10 @@ function Projects() {
     },
     {
       title: "Employee Details Management",
-      description: "Technologies used: React, JavaScript, MongoDB, Express.js, Node.js.",
-      image: EmployeeDetailsURL,
+      description: "Full-stack MERN application for managing employee records with CRUD operations and authentication.",
+      technologies: ["React", "JavaScript", "MongoDB", "Express.js", "Node.js"],
+      icon: Users,
+      gradient: "from-orange-500 to-red-500",
       modal: EmployeeDetailsModal,
       buttons: [
         {
@@ -59,8 +60,10 @@ function Projects() {
     },
     {
       title: "CadScript",
-      description: "Technologies used: React, JavaScript, Tailwind CSS.",
-      image: CadScriptURL,
+      description: "Interactive CAD scripting platform with code editor and real-time preview capabilities.",
+      technologies: ["React", "JavaScript", "Tailwind CSS"],
+      icon: FileCode,
+      gradient: "from-indigo-500 to-purple-500",
       modal: CadScriptModal,
       buttons: [
         {
@@ -97,6 +100,7 @@ function Projects() {
       >
         {projects.map((project, index) => {
           const ModalComponent = project.modal;
+          const IconComponent = project.icon;
           return (
             <AnimatedSection
               key={index}
@@ -104,29 +108,51 @@ function Projects() {
               delay={index * 150}
               duration={600}
             >
-              <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <figure className="h-48 sm:h-56 lg:h-64 overflow-hidden">
-                  <SmartImage
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    fallbackSrc="https://via.placeholder.com/400x300/374151/9CA3AF?text=Project+Image"
-                  />
-                </figure>
-                <div className="card-body p-4 sm:p-6">
-                  <h2 className="card-title text-lg sm:text-xl lg:text-2xl font-bold text-base-content mb-3">
+              <div className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 h-full">
+                {/* Icon header with gradient */}
+                <div className={`relative overflow-hidden bg-gradient-to-br ${project.gradient} p-8 sm:p-10`}>
+                  <div className="absolute inset-0 bg-black/10"></div>
+                  <div className="relative z-10 flex justify-center">
+                    <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
+                      <IconComponent className="w-12 h-12 sm:w-16 sm:h-16 text-white" strokeWidth={1.5} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="card-body p-5 sm:p-6">
+                  <h2 className="card-title text-xl sm:text-2xl font-bold text-base-content mb-3 flex items-center gap-2">
                     {project.title}
                   </h2>
+                  
                   <p className="text-sm sm:text-base text-base-content/80 leading-relaxed mb-4">
                     {project.description}
                   </p>
-                  <div className="card-actions justify-end mt-auto flex-wrap gap-2">
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                      <span 
+                        key={techIndex}
+                        className="badge badge-sm badge-outline text-xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <span className="badge badge-sm badge-outline text-xs">
+                        +{project.technologies.length - 4} more
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="card-actions justify-start mt-auto flex-wrap gap-2">
                     {project.buttons.map((button, btnIndex) => (
                       <button
                         key={btnIndex}
-                        className="btn btn-primary btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base"
+                        className="btn btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                         onClick={() => window.open(button.url, "_blank")}
                       >
+                        <ExternalLink className="w-4 h-4" />
                         {button.text}
                       </button>
                     ))}
