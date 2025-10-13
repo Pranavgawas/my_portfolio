@@ -6,7 +6,7 @@ function QuickStats() {
   const stats = [
     {
       icon: Briefcase,
-      value: "5+",
+      value: "7+",
       label: "Projects Completed",
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-blue-500/10 to-cyan-500/10"

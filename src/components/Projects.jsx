@@ -6,12 +6,44 @@ import EmployeeDetailsModal from "./Modal/EmployeeDetailsModal";
 import CadScriptModal from "./Modal/CadScriptModal";
 import AnimatedSection from "./AnimatedSection";
 import { SkeletonCard } from "./SkeletonLoaders";
-import { Car, MessageSquare, Award, Users, FileCode, ExternalLink, Code2 } from "lucide-react";
+import { Car, MessageSquare, Award, Users, FileCode, ExternalLink, Code2, Sparkles, Palette } from "lucide-react";
 
 function Projects() {
   const [loading, setLoading] = useState(true);
 
   const projects = [
+    {
+      title: "Bhakti Sagar",
+      description: "Spiritual content platform with divine bhajans, mantras, and devotional resources built with modern React.",
+      technologies: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
+      icon: Sparkles,
+      gradient: "from-amber-500 to-orange-500",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://bhakti-sagar-react.vercel.app/"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Pixel Perfect",
+      description: "Stunning pixel-perfect design showcase with attention to detail and modern UI/UX principles.",
+      technologies: ["React", "JavaScript", "CSS3", "Responsive Design"],
+      icon: Palette,
+      gradient: "from-pink-500 to-rose-500",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://pixel-perfect-six.vercel.app/"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
     {
       title: "Vehicle Configurator",
       description: "Full-stack microservices application for vehicle customization with JWT authentication and Docker deployment.",
@@ -108,6 +140,7 @@ function Projects() {
         {projects.map((project, index) => {
           const ModalComponent = project.modal;
           const IconComponent = project.icon;
+          const hasModal = ModalComponent !== null;
           
           // Status badge color
           const statusColor = project.status === "Live" 
@@ -179,7 +212,7 @@ function Projects() {
                         {button.text}
                       </button>
                     ))}
-                    <ModalComponent />
+                    {hasModal && <ModalComponent />}
                   </div>
                 </div>
               </article>
