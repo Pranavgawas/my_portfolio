@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
 import image from "../assets/image.json";
+import { scrollToSection, getCurrentSection } from "../utils/scrollUtils";
 
 function Navbar() {
   const avatarUrl = image["avatar"];
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark"
   );
+  const [activeSection, setActiveSection] = useState("hero");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setActiveSection(getCurrentSection());
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -21,45 +38,35 @@ function Navbar() {
     }
   };
 
-  const projectScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleNavClick = (sectionId) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false); // Close mobile menu after click
   };
 
-  const educationScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const skillsScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const certificateScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const isActive = (sectionId) => activeSection === sectionId;
 
   return (
-    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-base-100/95">
+    <nav className="navbar bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-base-100/95" role="navigation" aria-label="Main navigation">
+      {/* Skip to main content link for accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 btn btn-primary z-[60]">
+        Skip to main content
+      </a>
+      
       <div className="navbar-start">
         <div className="dropdown">
           <div className="flex-none">
-            <button className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors">
+            <button 
+              className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 className="inline-block w-5 h-5 stroke-current"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -75,29 +82,43 @@ function Navbar() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 border border-base-200"
           >
             <li>
-              <a onClick={() => projectScroll("projectId")} className="hover:bg-primary/10">Projects</a>
-              <ul className="p-2">
-                <li>
-                  <a onClick={() => projectScroll("projectId")} className="hover:bg-primary/10">
-                    Vehicle Configurator
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => projectScroll("projectId")} className="hover:bg-primary/10">Feed App</a>
-                </li>
-              </ul>
+              <a 
+                onClick={() => handleNavClick("projectId")} 
+                className={`hover:bg-primary/10 ${isActive("projectId") ? "bg-primary/20 font-semibold" : ""}`}
+              >
+                Projects
+              </a>
             </li>
             <li>
-              <a onClick={() => educationScroll("educationId")} className="hover:bg-primary/10">Education</a>
+              <a 
+                onClick={() => handleNavClick("educationId")} 
+                className={`hover:bg-primary/10 ${isActive("educationId") ? "bg-primary/20 font-semibold" : ""}`}
+              >
+                Education
+              </a>
             </li>
-
             <li>
-              <a onClick={() => skillsScroll("skillsId")} className="hover:bg-primary/10">Skills</a>
+              <a 
+                onClick={() => handleNavClick("skillsId")} 
+                className={`hover:bg-primary/10 ${isActive("skillsId") ? "bg-primary/20 font-semibold" : ""}`}
+              >
+                Skills
+              </a>
             </li>
-
             <li>
-              <a onClick={() => certificateScroll("certificateId")} className="hover:bg-primary/10">
-                Certificate
+              <a 
+                onClick={() => handleNavClick("certificateId")} 
+                className={`hover:bg-primary/10 ${isActive("certificateId") ? "bg-primary/20 font-semibold" : ""}`}
+              >
+                Certifications
+              </a>
+            </li>
+            <li>
+              <a 
+                onClick={() => handleNavClick("contactId")} 
+                className={`hover:bg-primary/10 ${isActive("contactId") ? "bg-primary/20 font-semibold" : ""}`}
+              >
+                Contact
               </a>
             </li>
           </ul>
@@ -106,45 +127,69 @@ function Navbar() {
           tabIndex={0}
           role="button"
           className="btn btn-ghost btn-circle avatar ring-2 ring-primary/20 ring-offset-2 ring-offset-base-100 hover:ring-primary/40 transition-all"
+          aria-label="Pranav Gawas profile picture"
         >
           <div className="w-10 rounded-full">
             <img alt="Pranav Gawas Avatar" src={avatarUrl} />
           </div>
         </div>
-        <a className="btn btn-ghost text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:from-secondary hover:to-accent transition-all">
+        <button 
+          className="btn btn-ghost text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:from-secondary hover:to-accent transition-all"
+          onClick={() => handleNavClick("hero")}
+          aria-label="Go to homepage"
+        >
           Pranav Gawas
-        </a>
+        </button>
       </div>
       <div
         className="navbar-center hidden lg:flex"
         style={{ marginLeft: "-100px" }}
       >
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <details>
-              <summary className="hover:bg-primary/10">Project</summary>
-              <ul className="p-2 bg-base-100 shadow-lg border border-base-200">
-                <li>
-                  <a onClick={() => projectScroll("projectId")} className="hover:bg-primary/10">
-                    Vehicle Configurator
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => projectScroll("projectId")} className="hover:bg-primary/10">Feed App</a>
-                </li>
-              </ul>
-            </details>
+        <ul className="menu menu-horizontal px-1" role="menubar">
+          <li role="none">
+            <a 
+              onClick={() => handleNavClick("projectId")} 
+              className={`hover:bg-primary/10 ${isActive("projectId") ? "bg-primary/20 font-semibold" : ""}`}
+              role="menuitem"
+            >
+              Projects
+            </a>
           </li>
-          <li>
-            <a onClick={() => skillsScroll("educationId")} className="hover:bg-primary/10">Education</a>
+          <li role="none">
+            <a 
+              onClick={() => handleNavClick("educationId")} 
+              className={`hover:bg-primary/10 ${isActive("educationId") ? "bg-primary/20 font-semibold" : ""}`}
+              role="menuitem"
+            >
+              Education
+            </a>
           </li>
-
-          <li>
-            <a onClick={() => skillsScroll("skillsId")} className="hover:bg-primary/10">Skills</a>
+          <li role="none">
+            <a 
+              onClick={() => handleNavClick("skillsId")} 
+              className={`hover:bg-primary/10 ${isActive("skillsId") ? "bg-primary/20 font-semibold" : ""}`}
+              role="menuitem"
+            >
+              Skills
+            </a>
           </li>
-
-          <li>
-            <a onClick={() => skillsScroll("certificateId")} className="hover:bg-primary/10">Certificate</a>
+          <li role="none">
+            <a 
+              onClick={() => handleNavClick("certificateId")} 
+              className={`hover:bg-primary/10 ${isActive("certificateId") ? "bg-primary/20 font-semibold" : ""}`}
+              role="menuitem"
+            >
+              Certifications
+            </a>
+          </li>
+          <li role="none">
+            <a 
+              onClick={() => handleNavClick("contactId")} 
+              className={`hover:bg-primary/10 ${isActive("contactId") ? "bg-primary/20 font-semibold" : ""}`}
+              role="menuitem"
+            >
+              Contact
+            </a>
           </li>
         </ul>
       </div>
@@ -188,7 +233,7 @@ function Navbar() {
           </svg>
         </label>
       </div>
-    </div>
+    </nav>
   );
 }
 

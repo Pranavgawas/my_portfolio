@@ -19,7 +19,9 @@ function Projects() {
       icon: Car,
       gradient: "from-blue-500 to-cyan-500",
       modal: VehicleConfigModel,
-      buttons: []
+      buttons: [],
+      status: "Completed",
+      date: "2024"
     },
     {
       title: "Feed App", 
@@ -28,7 +30,9 @@ function Projects() {
       icon: MessageSquare,
       gradient: "from-purple-500 to-pink-500",
       modal: FeedModel,
-      buttons: []
+      buttons: [],
+      status: "Completed",
+      date: "2024"
     },
     {
       title: "CertifyMe",
@@ -39,10 +43,12 @@ function Projects() {
       modal: CertifyMeModal,
       buttons: [
         {
-          text: "View Website",
+          text: "View Live",
           url: "https://certify-me-liart.vercel.app/"
         }
-      ]
+      ],
+      status: "Live",
+      date: "2024"
     },
     {
       title: "Employee Details Management",
@@ -53,10 +59,12 @@ function Projects() {
       modal: EmployeeDetailsModal,
       buttons: [
         {
-          text: "View Website", 
+          text: "View Live", 
           url: "https://employee-details-management.onrender.com/"
         }
-      ]
+      ],
+      status: "Live",
+      date: "2024"
     },
     {
       title: "CadScript",
@@ -67,10 +75,12 @@ function Projects() {
       modal: CadScriptModal,
       buttons: [
         {
-          text: "View Website",
+          text: "View Live",
           url: "https://cad-script.vercel.app/"
         }
-      ]
+      ],
+      status: "Live",
+      date: "2024"
     }
   ];
 
@@ -94,13 +104,16 @@ function Projects() {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div
-        id="projectId"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {projects.map((project, index) => {
           const ModalComponent = project.modal;
           const IconComponent = project.icon;
+          
+          // Status badge color
+          const statusColor = project.status === "Live" 
+            ? "badge-success" 
+            : "badge-info";
+          
           return (
             <AnimatedSection
               key={index}
@@ -108,38 +121,47 @@ function Projects() {
               delay={index * 150}
               duration={600}
             >
-              <div className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 h-full">
+              <article className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 h-full">
                 {/* Icon header with gradient */}
                 <div className={`relative overflow-hidden bg-gradient-to-br ${project.gradient} p-8 sm:p-10`}>
-                  <div className="absolute inset-0 bg-black/10"></div>
-                  <div className="relative z-10 flex justify-center">
+                  <div className="absolute inset-0 bg-black/10" aria-hidden="true"></div>
+                  <div className="relative z-10 flex justify-between items-start">
                     <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
-                      <IconComponent className="w-12 h-12 sm:w-16 sm:h-16 text-white" strokeWidth={1.5} />
+                      <IconComponent className="w-12 h-12 sm:w-16 sm:h-16 text-white" strokeWidth={1.5} aria-hidden="true" />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <span className={`badge ${statusColor} badge-sm text-white`}>
+                        {project.status}
+                      </span>
+                      <span className="badge badge-outline badge-sm bg-white/20 text-white border-white/40">
+                        {project.date}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <div className="card-body p-5 sm:p-6">
-                  <h2 className="card-title text-xl sm:text-2xl font-bold text-base-content mb-3 flex items-center gap-2">
+                  <h3 className="card-title text-xl sm:text-2xl font-bold text-base-content mb-3 flex items-center gap-2">
                     {project.title}
-                  </h2>
+                  </h3>
                   
                   <p className="text-sm sm:text-base text-base-content/80 leading-relaxed mb-4">
                     {project.description}
                   </p>
 
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-4" role="list" aria-label="Technologies used">
                     {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <span 
                         key={techIndex}
                         className="badge badge-sm badge-outline text-xs"
+                        role="listitem"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 4 && (
-                      <span className="badge badge-sm badge-outline text-xs">
+                      <span className="badge badge-sm badge-outline text-xs" role="listitem">
                         +{project.technologies.length - 4} more
                       </span>
                     )}
@@ -151,15 +173,16 @@ function Projects() {
                         key={btnIndex}
                         className="btn btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                         onClick={() => window.open(button.url, "_blank")}
+                        aria-label={`${button.text} for ${project.title}`}
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
                         {button.text}
                       </button>
                     ))}
                     <ModalComponent />
                   </div>
                 </div>
-              </div>
+              </article>
             </AnimatedSection>
           );
         })}
