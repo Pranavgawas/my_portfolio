@@ -37,7 +37,7 @@
 ## 🚀 Next Steps
 
 1. **Replace Domain URLs**
-   - Find "your-portfolio-domain.com"
+   - Find "portfolio-three-rouge-97.vercel.app"
    - Replace with your actual domain
    - Files: index.html, sitemap.xml, robots.txt
 

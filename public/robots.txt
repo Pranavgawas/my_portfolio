@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location (Update with your actual domain)
-Sitemap: https://your-portfolio-domain.com/sitemap.xml
+Sitemap: https://portfolio-three-rouge-97.vercel.app/sitemap.xml
 
 # Block access to source files, configurations, and build files
 Disallow: /src/

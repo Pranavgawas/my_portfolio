@@ -6,48 +6,48 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://your-portfolio-domain.com/</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Projects Section -->
   <url>
-    <loc>https://your-portfolio-domain.com/#projectId</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/#projectId</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Education Section -->
   <url>
-    <loc>https://your-portfolio-domain.com/#educationId</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/#educationId</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Skills Section -->
   <url>
-    <loc>https://your-portfolio-domain.com/#skillsId</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/#skillsId</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Certifications Section -->
   <url>
-    <loc>https://your-portfolio-domain.com/#certificateId</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/#certificateId</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Contact Section -->
   <url>
-    <loc>https://your-portfolio-domain.com/#contactId</loc>
-    <lastmod>2025-10-13</lastmod>
+    <loc>https://portfolio-three-rouge-97.vercel.app/#contactId</loc>
+    <lastmod>2025-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

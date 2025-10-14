@@ -131,7 +131,7 @@ Enhanced robots.txt with:
 User-agent: *
 Allow: /
 
-Sitemap: https://your-portfolio-domain.com/sitemap.xml
+Sitemap: https://portfolio-three-rouge-97.vercel.app/sitemap.xml
 
 # Specific rules for Googlebot, Bingbot, etc.
 ```
@@ -177,7 +177,7 @@ Added meta tags for:
 
 #### Canonical URL
 ```html
-<link rel="canonical" href="https://your-portfolio-domain.com/" />
+<link rel="canonical" href="https://portfolio-three-rouge-97.vercel.app/" />
 ```
 - Prevents duplicate content issues
 - Consolidates link equity
