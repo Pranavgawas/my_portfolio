@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GraduationCap, Award, BookOpen, ExternalLink, Calendar, MapPin } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, ExternalLink, Calendar, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 
 function EducationEnhanced() {
   const [expandedItem, setExpandedItem] = useState(null);
@@ -14,7 +14,8 @@ function EducationEnhanced() {
       grade: 'First Division',
       location: 'Mumbai, India',
       icon: GraduationCap,
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-purple-500 via-purple-600 to-pink-500',
+      bgGradient: 'from-purple-500/5 via-purple-600/5 to-pink-500/5',
       certificateUrl: 'https://drive.google.com/file/d/1ANIcv-Imh9mUH-P-gaGAohzxCsaBspN6/view',
       highlights: [
         'Experienced in learning a diverse range of programming languages, frameworks, and software development methodologies',
@@ -32,7 +33,8 @@ function EducationEnhanced() {
       grade: 'First Division',
       location: 'India',
       icon: GraduationCap,
-      gradient: 'from-blue-500 to-cyan-500',
+      gradient: 'from-blue-500 via-blue-600 to-cyan-500',
+      bgGradient: 'from-blue-500/5 via-blue-600/5 to-cyan-500/5',
       certificateUrl: 'https://drive.google.com/file/d/167HtW4NLlNU7zfnW2mXt5lOmv6JSGt78/view',
       highlights: [
         'Graduated with First Division',
@@ -50,7 +52,8 @@ function EducationEnhanced() {
       grade: 'First Division',
       location: 'India',
       icon: BookOpen,
-      gradient: 'from-green-500 to-emerald-500',
+      gradient: 'from-green-500 via-green-600 to-emerald-500',
+      bgGradient: 'from-green-500/5 via-green-600/5 to-emerald-500/5',
       certificateUrl: 'https://drive.google.com/file/d/15tYoysi-PbRoaUBWa3a8qaQyGP2xowe4/view',
       highlights: [
         'Passed with First Division',
@@ -67,7 +70,8 @@ function EducationEnhanced() {
       grade: 'Distinction',
       location: 'India',
       icon: Award,
-      gradient: 'from-orange-500 to-red-500',
+      gradient: 'from-orange-500 via-orange-600 to-red-500',
+      bgGradient: 'from-orange-500/5 via-orange-600/5 to-red-500/5',
       certificateUrl: 'https://drive.google.com/file/d/15tLxsuEP7iLYpplfIJ23ek4UZyLEBZOY/view',
       highlights: [
         'Passed with Distinction',
@@ -90,8 +94,8 @@ function EducationEnhanced() {
       {/* Timeline for larger screens */}
       <div className="hidden md:block">
         <div className="relative">
-          {/* Center line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-secondary to-accent opacity-20"></div>
+          {/* Center line with gradient */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/30 via-secondary/30 to-accent/30"></div>
           
           {educationData.map((edu, index) => {
             const IconComponent = edu.icon;
@@ -99,56 +103,63 @@ function EducationEnhanced() {
             const isExpanded = expandedItem === edu.id;
             
             return (
-              <div key={edu.id} className={`relative mb-12 ${isLeft ? 'pr-1/2' : 'pl-1/2'}`}>
+              <div key={edu.id} className={`relative mb-16 ${isLeft ? 'pr-1/2' : 'pl-1/2'}`}>
                 <div className={`flex items-center ${isLeft ? 'flex-row' : 'flex-row-reverse'} gap-8`}>
                   {/* Content Card */}
-                  <div className={`flex-1 ${isLeft ? 'text-right pr-8' : 'text-left pl-8'}`}>
+                  <div className={`flex-1 ${isLeft ? 'text-right pr-12' : 'text-left pl-12'}`}>
                     <article 
-                      className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-200 hover:border-primary/30 cursor-pointer transform hover:-translate-y-1"
+                      className={`group card bg-gradient-to-br ${edu.bgGradient} backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 border border-base-200/50 hover:border-primary/30 cursor-pointer transform hover:-translate-y-2 hover:scale-[1.02] relative overflow-hidden`}
                       onClick={() => toggleExpand(edu.id)}
                       role="button"
                       tabIndex={0}
                       onKeyPress={(e) => e.key === 'Enter' && toggleExpand(edu.id)}
                       aria-expanded={isExpanded}
                     >
-                      <div className={`card-body p-6 ${isLeft ? 'items-end' : 'items-start'}`}>
+                      {/* Animated gradient overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${edu.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                      
+                      <div className={`card-body p-6 relative z-10 ${isLeft ? 'items-end' : 'items-start'}`}>
                         {/* Header */}
                         <div className={`flex items-start gap-4 w-full ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}>
-                          <div className={`p-3 bg-gradient-to-br ${edu.gradient} rounded-xl shadow-lg flex-shrink-0`}>
-                            <IconComponent className="w-6 h-6 text-white" aria-hidden="true" />
+                          <div className={`p-3 bg-gradient-to-br ${edu.gradient} rounded-2xl shadow-lg flex-shrink-0 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                            <IconComponent className="w-7 h-7 text-white" aria-hidden="true" />
                           </div>
                           <div className={`flex-1 ${isLeft ? 'text-right' : 'text-left'}`}>
                             <div className={`flex items-center gap-2 text-sm text-base-content/60 mb-2 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                               <Calendar className="w-4 h-4" aria-hidden="true" />
-                              <span>{edu.year}</span>
+                              <span className="font-medium">{edu.year}</span>
                             </div>
-                            <h3 className="text-xl font-bold text-base-content mb-1">
+                            <h3 className="text-xl font-bold text-base-content mb-1 group-hover:text-primary transition-colors duration-300">
                               {edu.title}
                             </h3>
-                            <p className="text-sm text-base-content/70 mb-2">
+                            <p className="text-sm text-base-content/70 mb-3 font-medium">
                               {edu.subtitle}
                             </p>
+                            <div className={`flex items-center gap-1.5 text-xs text-base-content/50 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+                              <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
+                              <span>{edu.location}</span>
+                            </div>
                           </div>
                         </div>
 
-                        {/* Stats */}
+                        {/* Stats with enhanced styling */}
                         <div className={`flex flex-wrap gap-2 mt-4 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-                          <span className="badge badge-lg badge-outline">
-                            {edu.percentage}
+                          <span className="badge badge-lg badge-outline border-2 font-semibold hover:scale-105 transition-transform">
+                            📊 {edu.percentage}
                           </span>
-                          <span className={`badge badge-lg badge-success text-white`}>
-                            {edu.grade}
+                          <span className={`badge badge-lg bg-gradient-to-r ${edu.gradient} text-white border-0 font-semibold shadow-md hover:scale-105 transition-transform`}>
+                            🏆 {edu.grade}
                           </span>
                         </div>
 
                         {/* Expandable Content */}
-                        {isExpanded && (
-                          <div className={`mt-4 pt-4 border-t border-base-200 w-full ${isLeft ? 'text-right' : 'text-left'}`}>
-                            <ul className="space-y-2 mb-4">
+                        <div className={`overflow-hidden transition-all duration-500 ${isExpanded ? 'max-h-[1000px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+                          <div className={`pt-4 border-t border-base-200/50 w-full ${isLeft ? 'text-right' : 'text-left'}`}>
+                            <ul className="space-y-3 mb-4">
                               {edu.highlights.map((highlight, idx) => (
-                                <li key={idx} className={`text-sm text-base-content/80 flex items-start gap-2 ${isLeft ? 'flex-row-reverse text-right' : ''}`}>
-                                  <span className="text-primary mt-1">•</span>
-                                  <span className="flex-1">{highlight}</span>
+                                <li key={idx} className={`text-sm text-base-content/80 flex items-start gap-2 ${isLeft ? 'flex-row-reverse text-right' : ''} animate-fadeIn`} style={{animationDelay: `${idx * 100}ms`}}>
+                                  <span className={`text-transparent bg-gradient-to-r ${edu.gradient} bg-clip-text mt-1 font-bold`}>✦</span>
+                                  <span className="flex-1 leading-relaxed">{highlight}</span>
                                 </li>
                               ))}
                             </ul>
@@ -156,7 +167,7 @@ function EducationEnhanced() {
                             {/* Skills */}
                             <div className={`flex flex-wrap gap-2 mb-4 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                               {edu.skills.map((skill, idx) => (
-                                <span key={idx} className="badge badge-sm badge-primary badge-outline">
+                                <span key={idx} className={`badge badge-sm bg-gradient-to-r ${edu.gradient} text-white border-0 shadow-sm hover:scale-110 transition-transform`}>
                                   {skill}
                                 </span>
                               ))}
@@ -168,27 +179,28 @@ function EducationEnhanced() {
                                 e.stopPropagation();
                                 handleCertificateClick(edu.certificateUrl);
                               }}
-                              className="btn btn-sm btn-primary gap-2"
+                              className={`btn btn-sm bg-gradient-to-r ${edu.gradient} text-white border-0 gap-2 hover:scale-105 hover:shadow-lg transition-all duration-300`}
                               aria-label={`View ${edu.title} certificate`}
                             >
                               <ExternalLink className="w-4 h-4" aria-hidden="true" />
                               View Certificate
                             </button>
                           </div>
-                        )}
+                        </div>
                         
                         {!isExpanded && (
-                          <p className="text-xs text-base-content/50 mt-2">
-                            Click to view details
-                          </p>
+                          <div className={`flex items-center gap-1.5 text-xs text-base-content/40 mt-3 ${isLeft ? 'justify-end' : 'justify-start'} group-hover:text-primary transition-colors`}>
+                            <span>Click to view details</span>
+                            <ChevronDown className="w-3.5 h-3.5 animate-bounce" aria-hidden="true" />
+                          </div>
                         )}
                       </div>
                     </article>
                   </div>
 
-                  {/* Timeline Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full border-4 border-base-100 shadow-lg flex items-center justify-center z-10">
-                    <span className="text-white text-xs font-bold">{index + 1}</span>
+                  {/* Timeline Dot with enhanced styling */}
+                  <div className={`absolute left-1/2 transform -translate-x-1/2 w-14 h-14 bg-gradient-to-br ${edu.gradient} rounded-full border-4 border-base-100 shadow-xl flex items-center justify-center z-10 group-hover:scale-125 transition-all duration-300`}>
+                    <span className="text-white text-sm font-bold">{index + 1}</span>
                   </div>
                 </div>
               </div>
@@ -206,7 +218,7 @@ function EducationEnhanced() {
           return (
             <article 
               key={edu.id}
-              className="card bg-base-100 shadow-xl border border-base-200 hover:border-primary/30 cursor-pointer transition-all duration-300"
+              className="group card bg-base-100 shadow-xl border border-base-200 hover:border-primary/30 cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
               onClick={() => toggleExpand(edu.id)}
               role="button"
               tabIndex={0}
@@ -214,23 +226,28 @@ function EducationEnhanced() {
               aria-expanded={isExpanded}
             >
               {/* Header with gradient */}
-              <div className={`bg-gradient-to-br ${edu.gradient} p-6 relative`}>
-                <div className="absolute top-4 right-4 badge badge-lg bg-white/20 text-white border-white/40">
+              <div className={`bg-gradient-to-br ${edu.gradient} p-6 relative overflow-hidden`}>
+                {/* Animated background pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+                </div>
+                
+                <div className="absolute top-4 right-4 badge badge-lg bg-white/20 text-white border-white/40 backdrop-blur-sm font-bold">
                   #{index + 1}
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl flex-shrink-0">
+                <div className="flex items-start gap-4 relative z-10">
+                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-2xl flex-shrink-0 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                     <IconComponent className="w-8 h-8 text-white" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 text-sm text-white/90 mb-2">
                       <Calendar className="w-4 h-4" aria-hidden="true" />
-                      <span>{edu.year}</span>
+                      <span className="font-semibold">{edu.year}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-1">
+                    <h3 className="text-xl font-bold text-white mb-1 leading-tight">
                       {edu.title}
                     </h3>
-                    <p className="text-sm text-white/90">
+                    <p className="text-sm text-white/90 font-medium">
                       {edu.subtitle}
                     </p>
                   </div>
@@ -240,26 +257,26 @@ function EducationEnhanced() {
               <div className="card-body p-6">
                 {/* Stats */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="badge badge-lg badge-outline">
-                    {edu.percentage}
+                  <span className="badge badge-lg badge-outline border-2 font-semibold">
+                    📊 {edu.percentage}
                   </span>
-                  <span className="badge badge-lg badge-success text-white">
-                    {edu.grade}
+                  <span className={`badge badge-lg bg-gradient-to-r ${edu.gradient} text-white border-0 font-semibold shadow-md`}>
+                    🏆 {edu.grade}
                   </span>
-                  <div className="flex items-center gap-1 text-sm text-base-content/60">
+                  <div className="flex items-center gap-1 text-sm text-base-content/60 px-3 py-1 bg-base-200/50 rounded-full">
                     <MapPin className="w-4 h-4" aria-hidden="true" />
                     <span>{edu.location}</span>
                   </div>
                 </div>
 
                 {/* Expandable Content */}
-                {isExpanded && (
+                <div className={`overflow-hidden transition-all duration-500 ${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="mt-4 pt-4 border-t border-base-200">
-                    <ul className="space-y-2 mb-4">
+                    <ul className="space-y-3 mb-4">
                       {edu.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-sm text-base-content/80 flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
-                          <span className="flex-1">{highlight}</span>
+                        <li key={idx} className="text-sm text-base-content/80 flex items-start gap-2 animate-fadeIn" style={{animationDelay: `${idx * 100}ms`}}>
+                          <span className={`text-transparent bg-gradient-to-r ${edu.gradient} bg-clip-text mt-1 font-bold`}>✦</span>
+                          <span className="flex-1 leading-relaxed">{highlight}</span>
                         </li>
                       ))}
                     </ul>
@@ -267,7 +284,7 @@ function EducationEnhanced() {
                     {/* Skills */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {edu.skills.map((skill, idx) => (
-                        <span key={idx} className="badge badge-sm badge-primary badge-outline">
+                        <span key={idx} className={`badge badge-sm bg-gradient-to-r ${edu.gradient} text-white border-0 shadow-sm`}>
                           {skill}
                         </span>
                       ))}
@@ -279,19 +296,20 @@ function EducationEnhanced() {
                         e.stopPropagation();
                         handleCertificateClick(edu.certificateUrl);
                       }}
-                      className="btn btn-sm btn-primary gap-2 w-full"
+                      className={`btn btn-sm bg-gradient-to-r ${edu.gradient} text-white border-0 gap-2 w-full hover:scale-105 hover:shadow-lg transition-all duration-300`}
                       aria-label={`View ${edu.title} certificate`}
                     >
                       <ExternalLink className="w-4 h-4" aria-hidden="true" />
                       View Certificate
                     </button>
                   </div>
-                )}
+                </div>
                 
                 {!isExpanded && (
-                  <p className="text-sm text-base-content/60 text-center">
-                    Tap to view details
-                  </p>
+                  <div className="flex items-center justify-center gap-1.5 text-sm text-base-content/60 mt-2 group-hover:text-primary transition-colors">
+                    <span>Tap to view details</span>
+                    <ChevronDown className="w-4 h-4 animate-bounce" aria-hidden="true" />
+                  </div>
                 )}
               </div>
             </article>

@@ -64,11 +64,11 @@ const NotFound = () => {
             Still need help? Feel free to contact me:
           </p>
           <a
-            href="mailto:pranavgawas1999@gmail.com"
+            href="mailto:pranavgawas.work@gmail.com"
             className="btn btn-ghost btn-sm gap-2 text-primary hover:text-primary-focus"
           >
             <Mail size={16} />
-            pranavgawas1999@gmail.com
+            pranavgawas.work@gmail.com
           </a>
         </div>
 

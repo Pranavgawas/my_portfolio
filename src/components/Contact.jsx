@@ -3,7 +3,7 @@ import { Mail, Github, Linkedin, Twitter, Facebook, Instagram, Send, Copy, Check
 
 function Contact() {
   const [emailCopied, setEmailCopied] = useState(false);
-  const email = "pranavgawas1999@gmail.com";
+  const email = "pranavgawas.work@gmail.com";
 
   const socialLinks = [
     {

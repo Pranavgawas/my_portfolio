@@ -1,5 +1,6 @@
 import { Code2, Terminal, Sparkles } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
+import image from '../assets/image.json';
 
 function Hero() {
   return (
@@ -13,16 +14,31 @@ function Hero() {
       
       <div className="hero-content text-center px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-xs sm:max-w-md lg:max-w-3xl xl:max-w-5xl">
-          {/* Icon decorations */}
-          <div className="flex justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8" role="presentation" aria-hidden="true">
-            <div className="p-3 sm:p-4 bg-primary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none" style={{animationDelay: '0s', animationDuration: '3s'}}>
-              <Code2 className="w-8 h-8 sm:w-10 sm:h-10 text-primary" aria-hidden="true" />
-            </div>
-            <div className="p-3 sm:p-4 bg-secondary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none" style={{animationDelay: '0.5s', animationDuration: '3s'}}>
-              <Terminal className="w-8 h-8 sm:w-10 sm:h-10 text-secondary" aria-hidden="true" />
-            </div>
-            <div className="p-3 sm:p-4 bg-accent/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none" style={{animationDelay: '1s', animationDuration: '3s'}}>
-              <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-accent" aria-hidden="true" />
+          {/* Profile Image & Icon decorations */}
+          <div className="flex flex-col items-center mb-8 relative">
+            <div className="relative group mb-8">
+              {/* Outer glowing rings */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+              
+              {/* Profile Image Container */}
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 xl:w-48 xl:h-48 rounded-full overflow-hidden border-4 border-base-100 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
+                <img 
+                  src={image.avatar} 
+                  alt="Pranav Gawas" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Floating decorations */}
+              <div className="absolute -top-4 -right-4 p-3 bg-primary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '0s', animationDuration: '3s'}}>
+                <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-primary" aria-hidden="true" />
+              </div>
+              <div className="absolute top-1/2 -left-8 transform -translate-y-1/2 p-3 bg-secondary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '0.5s', animationDuration: '3s'}}>
+                <Terminal className="w-6 h-6 sm:w-8 sm:h-8 text-secondary" aria-hidden="true" />
+              </div>
+              <div className="absolute -bottom-4 right-1/2 transform translate-x-1/2 p-3 bg-accent/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '1s', animationDuration: '3s'}}>
+                <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-accent" aria-hidden="true" />
+              </div>
             </div>
           </div>
 

@@ -13,6 +13,162 @@ function Projects() {
 
   const projects = [
     {
+      title: "Inventory and Sales Management",
+      description: "Comprehensive system for tracking stock levels, managing sales transactions, and generating analytical reports for business optimization.",
+      technologies: ["Java", "Spring Boot", "MySQL", "React", "REST API"],
+      icon: FileCode,
+      gradient: "from-teal-500 to-emerald-600",
+      modal: null,
+      buttons: [
+        {
+          text: "GitHub",
+          url: "https://github.com/Pranavgawas/BIZNest-Inventory---Sales-Management"
+        }
+      ],
+      status: "Completed",
+      date: "2024"
+    },
+    {
+      title: "ATS Resume Coach",
+      description: "AI-powered resume analyzer and improver designed to help candidates optimize their resumes for ATS filters.",
+      technologies: ["AI", "React", "Vite", "Tailwind CSS"],
+      icon: Sparkles,
+      gradient: "from-blue-600 to-indigo-600",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://ats-resume-coach.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/ATS-Resume-Coach"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Plain Language Optimizer",
+      description: "AI tool that simplifies complex text into clear, easy-to-understand language using advanced NLP techniques.",
+      technologies: ["AI", "NLP", "React", "Vite"],
+      icon: Sparkles,
+      gradient: "from-emerald-500 to-teal-500",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://plain-language-optimizer.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/Plain-Language-Optimizer"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Image Resizer Pro",
+      description: "Professional image resizing tool with high-quality output, multiple format support, and bulk processing.",
+      technologies: ["React", "Canvas API", "Vite", "JavaScript"],
+      icon: Palette,
+      gradient: "from-rose-500 to-orange-500",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://image-resizer-pro-opal.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/image-resizer-pro"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Social Media Bio Formatter",
+      description: "Create perfectly formatted and optimized bios for Instagram, Twitter, and LinkedIn with customizable styles.",
+      technologies: ["React", "UI/UX", "Vite", "Tailwind CSS"],
+      icon: MessageSquare,
+      gradient: "from-purple-600 to-pink-600",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://social-media-bio-formatter.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/Social-Media-Bio-Formatter"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Contractor's Instant Quote",
+      description: "Dynamic estimation tool for contractors to generate instant, accurate quotes for various services and materials.",
+      technologies: ["React", "Calculation Engine", "Vite", "Tailwind CSS"],
+      icon: FileCode,
+      gradient: "from-blue-500 to-indigo-500",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://contractor-s-instant-quote.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/Contractor-s-Instant-Quote"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Developer's Debug Suite",
+      description: "All-in-one suite of essential debugging tools and utilities for web developers to accelerate troubleshooting.",
+      technologies: ["React", "Developer Tools", "Vite", "UI/UX"],
+      icon: Code2,
+      gradient: "from-slate-700 to-slate-900",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://developer-s-debug-suite.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/Developer-s-Debug-Suite"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
+      title: "Mobile Notary Toolkit",
+      description: "Productivity toolkit for mobile notaries to manage appointments, documents, and essential scheduling tasks.",
+      technologies: ["React", "Productivity", "Vite", "Tailwind CSS"],
+      icon: FileCode,
+      gradient: "from-cyan-600 to-blue-600",
+      modal: null,
+      buttons: [
+        {
+          text: "View Live",
+          url: "https://mobile-notary-toolkit.vercel.app"
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/snipprtsync-ai/Mobile-Notary-Toolkit"
+        }
+      ],
+      status: "Live",
+      date: "2025"
+    },
+    {
       title: "Bhakti Sagar",
       description: "Spiritual content platform with divine bhajans, mantras, and devotional resources built with modern React.",
       technologies: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
