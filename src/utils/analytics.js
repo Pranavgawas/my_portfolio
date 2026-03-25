@@ -1,3 +1,4 @@
+'use strict';
 // Simple, privacy-friendly analytics without cookies
 class SimpleAnalytics {
   constructor() {
@@ -53,8 +54,7 @@ class SimpleAnalytics {
 
     // In development, just log to console
     if (process.env.NODE_ENV === 'development') {
-      console.log('Analytics Event:', event);
-    }
+          }
 
     // In production, you could send to your analytics service
     // this.sendToAnalyticsService(event);

@@ -1,3 +1,4 @@
+'use strict';
 import { useState, useEffect, useRef } from 'react';
 
 const useIntersectionObserver = (options = {}) => {

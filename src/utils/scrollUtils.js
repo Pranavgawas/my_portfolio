@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Unified scroll utility for consistent navigation behavior
  * Handles smooth scrolling with navbar offset
