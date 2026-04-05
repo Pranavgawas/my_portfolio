@@ -1,52 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Coffee, Code2, Zap, Braces, Database } from "lucide-react";
+import { supabase } from "../lib/supabase";
+
+// Map icon name strings to actual lucide-react components
+const iconMap = { Coffee, Code2, Zap, Braces, Database };
 
 function ProgrammingSkills() {
-  const skills = [
-    {
-      name: "Java",
-      description: "Java, Jakarta EE, Spring Boot, JPA, Hibernate etc.",
-      icon: Coffee,
-      gradient: "from-orange-500 to-red-600",
-      bgColor: "bg-orange-50 dark:bg-orange-950/20"
-    },
-    {
-      name: ".NET",
-      description: ".NET (C#), Blazor, Entity Core, ADO.NET, ASP.NET MVC, LINQ.",
-      icon: Code2,
-      gradient: "from-purple-500 to-blue-600",
-      bgColor: "bg-purple-50 dark:bg-purple-950/20"
-    },
-    {
-      name: "JavaScript",
-      description: "JavaScript, React, jQuery, Node.js.",
-      icon: Zap,
-      gradient: "from-yellow-500 to-orange-500",
-      bgColor: "bg-yellow-50 dark:bg-yellow-950/20"
-    },
-    {
-      name: "React",
-      description: "React, Bootstrap, React Bootstrap, HTML, CSS, Tailwind CSS.",
-      icon: Braces,
-      gradient: "from-cyan-500 to-blue-500",
-      bgColor: "bg-cyan-50 dark:bg-cyan-950/20"
-    },
-    {
-      name: "MySQL",
-      description: "MySQL, SQL Server, Database Design, Query Optimization.",
-      icon: Database,
-      gradient: "from-blue-600 to-indigo-600",
-      bgColor: "bg-blue-50 dark:bg-blue-950/20"
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSkills() {
+      const { data, error } = await supabase
+        .from('skills')
+        .select('*')
+        .eq('category', 'programming')
+        .order('sort_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching programming skills:', error);
+      } else {
+        setSkills(data || []);
+      }
+      setLoading(false);
     }
-  ];
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="card bg-base-100 shadow-lg animate-pulse overflow-hidden">
+            <div className="h-24 bg-base-300"></div>
+            <div className="card-body p-5">
+              <div className="h-5 bg-base-300 rounded w-24 mb-2"></div>
+              <div className="h-4 bg-base-300 rounded w-full"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {skills.map((skill, index) => {
-        const IconComponent = skill.icon;
+      {skills.map((skill) => {
+        const IconComponent = iconMap[skill.icon_name] || Code2;
         return (
           <div 
-            key={index}
+            key={skill.id}
             className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 overflow-hidden group"
           >
             {/* Gradient header */}

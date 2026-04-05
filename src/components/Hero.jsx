@@ -1,8 +1,43 @@
+import { useState, useEffect } from 'react';
 import { Code2, Terminal, Sparkles } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
-import image from '../assets/image.json';
+import { supabase } from '../lib/supabase';
 
 function Hero() {
+  const [heroData, setHeroData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchHeroContent() {
+      const { data, error } = await supabase
+        .from('hero_content')
+        .select('*')
+        .limit(1)
+        .single();
+
+      if (error) {
+        console.error('Error fetching hero content:', error);
+      } else {
+        setHeroData(data);
+      }
+      setLoading(false);
+    }
+    fetchHeroContent();
+  }, []);
+
+  if (loading || !heroData) {
+    return (
+      <section id="hero" className="hero min-h-screen bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden flex items-center justify-center">
+        <div className="animate-pulse text-center">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-base-300 mx-auto mb-8"></div>
+          <div className="h-10 bg-base-300 rounded w-80 mx-auto mb-4"></div>
+          <div className="h-6 bg-base-300 rounded w-48 mx-auto mb-4"></div>
+          <div className="h-4 bg-base-300 rounded w-96 mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="hero" className="hero min-h-screen bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden">
       {/* Animated background elements - optimized for performance */}
@@ -23,7 +58,7 @@ function Hero() {
               {/* Profile Image Container */}
               <div className="relative w-32 h-32 sm:w-40 sm:h-40 xl:w-48 xl:h-48 rounded-full overflow-hidden border-4 border-base-100 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
                 <img 
-                  src={image.avatar} 
+                  src={heroData.avatar_url} 
                   alt="Pranav Gawas" 
                   className="w-full h-full object-cover"
                 />
@@ -43,17 +78,15 @@ function Hero() {
           </div>
 
           <h1 className="mb-5 sm:mb-6 lg:mb-8 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            Hello, I'm Pranav Gawas
+            {heroData.heading}
           </h1>
           
           <h2 className="mb-4 sm:mb-5 text-xl sm:text-2xl lg:text-3xl font-semibold text-base-content">
-            Full-Stack Developer
+            {heroData.subheading}
           </h2>
           
           <p className="mb-6 sm:mb-8 lg:mb-10 text-sm sm:text-base lg:text-lg leading-relaxed text-base-content/80 max-w-3xl mx-auto">
-            I build scalable web applications with modern technologies. 
-            Specialized in <span className="font-semibold text-primary">Java</span>, <span className="font-semibold text-secondary">Spring Boot</span>, <span className="font-semibold text-accent">.NET</span>, and <span className="font-semibold text-primary">React</span>. 
-            CDAC certified with expertise in full-stack development, microservices architecture, and cloud technologies.
+            {heroData.bio}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -75,7 +108,7 @@ function Hero() {
 
           {/* Tech stack badges */}
           <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
-            {['Java', 'Spring Boot', '.NET', 'React', 'Node.js', 'MySQL', 'Docker'].map((tech, index) => (
+            {heroData.tech_stack.map((tech, index) => (
               <span 
                 key={index}
                 className="badge badge-lg badge-outline hover:badge-primary transition-all duration-200 px-3 sm:px-4 py-3 sm:py-4 text-xs sm:text-sm font-medium cursor-default"

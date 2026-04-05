@@ -6,276 +6,46 @@ import EmployeeDetailsModal from "./Modal/EmployeeDetailsModal";
 import CadScriptModal from "./Modal/CadScriptModal";
 import AnimatedSection from "./AnimatedSection";
 import { SkeletonCard } from "./SkeletonLoaders";
-import { Car, MessageSquare, Award, Users, FileCode, ExternalLink, Code2, Sparkles, Palette } from "lucide-react";
+import { supabase } from "../lib/supabase";
+import {
+  Car, MessageSquare, Award, Users, FileCode,
+  ExternalLink, Code2, Sparkles, Palette
+} from "lucide-react";
+
+// Map icon name strings to actual lucide-react components
+const iconMap = {
+  Car, MessageSquare, Award, Users, FileCode,
+  Code2, Sparkles, Palette, ExternalLink
+};
+
+// Map modal reference strings to actual modal components
+const modalMap = {
+  VehicleConfigModel,
+  FeedModel,
+  CertifyMeModal,
+  EmployeeDetailsModal,
+  CadScriptModal
+};
 
 function Projects() {
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const projects = [
-    {
-      title: "Inventory and Sales Management",
-      description: "Comprehensive system for tracking stock levels, managing sales transactions, and generating analytical reports for business optimization.",
-      technologies: ["Java", "Spring Boot", "MySQL", "React", "REST API"],
-      icon: FileCode,
-      gradient: "from-teal-500 to-emerald-600",
-      modal: null,
-      buttons: [
-        {
-          text: "GitHub",
-          url: "https://github.com/Pranavgawas/BIZNest-Inventory---Sales-Management"
-        }
-      ],
-      status: "Completed",
-      date: "2024"
-    },
-    {
-      title: "ATS Resume Coach",
-      description: "AI-powered resume analyzer and improver designed to help candidates optimize their resumes for ATS filters.",
-      technologies: ["AI", "React", "Vite", "Tailwind CSS"],
-      icon: Sparkles,
-      gradient: "from-blue-600 to-indigo-600",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://ats-resume-coach.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/ATS-Resume-Coach"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Plain Language Optimizer",
-      description: "AI tool that simplifies complex text into clear, easy-to-understand language using advanced NLP techniques.",
-      technologies: ["AI", "NLP", "React", "Vite"],
-      icon: Sparkles,
-      gradient: "from-emerald-500 to-teal-500",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://plain-language-optimizer.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/Plain-Language-Optimizer"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Image Resizer Pro",
-      description: "Professional image resizing tool with high-quality output, multiple format support, and bulk processing.",
-      technologies: ["React", "Canvas API", "Vite", "JavaScript"],
-      icon: Palette,
-      gradient: "from-rose-500 to-orange-500",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://image-resizer-pro-opal.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/image-resizer-pro"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Social Media Bio Formatter",
-      description: "Create perfectly formatted and optimized bios for Instagram, Twitter, and LinkedIn with customizable styles.",
-      technologies: ["React", "UI/UX", "Vite", "Tailwind CSS"],
-      icon: MessageSquare,
-      gradient: "from-purple-600 to-pink-600",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://social-media-bio-formatter.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/Social-Media-Bio-Formatter"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Contractor's Instant Quote",
-      description: "Dynamic estimation tool for contractors to generate instant, accurate quotes for various services and materials.",
-      technologies: ["React", "Calculation Engine", "Vite", "Tailwind CSS"],
-      icon: FileCode,
-      gradient: "from-blue-500 to-indigo-500",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://contractor-s-instant-quote.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/Contractor-s-Instant-Quote"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Developer's Debug Suite",
-      description: "All-in-one suite of essential debugging tools and utilities for web developers to accelerate troubleshooting.",
-      technologies: ["React", "Developer Tools", "Vite", "UI/UX"],
-      icon: Code2,
-      gradient: "from-slate-700 to-slate-900",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://developer-s-debug-suite.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/Developer-s-Debug-Suite"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Mobile Notary Toolkit",
-      description: "Productivity toolkit for mobile notaries to manage appointments, documents, and essential scheduling tasks.",
-      technologies: ["React", "Productivity", "Vite", "Tailwind CSS"],
-      icon: FileCode,
-      gradient: "from-cyan-600 to-blue-600",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://mobile-notary-toolkit.vercel.app"
-        },
-        {
-          text: "GitHub",
-          url: "https://github.com/snipprtsync-ai/Mobile-Notary-Toolkit"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Bhakti Sagar",
-      description: "Spiritual content platform with divine bhajans, mantras, and devotional resources built with modern React.",
-      technologies: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
-      icon: Sparkles,
-      gradient: "from-amber-500 to-orange-500",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://bhakti-sagar-react.vercel.app/"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Pixel Perfect",
-      description: "Stunning pixel-perfect design showcase with attention to detail and modern UI/UX principles.",
-      technologies: ["React", "JavaScript", "CSS3", "Responsive Design"],
-      icon: Palette,
-      gradient: "from-pink-500 to-rose-500",
-      modal: null,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://pixel-perfect-six.vercel.app/"
-        }
-      ],
-      status: "Live",
-      date: "2025"
-    },
-    {
-      title: "Vehicle Configurator",
-      description: "Full-stack microservices application for vehicle customization with JWT authentication and Docker deployment.",
-      technologies: ["Spring Boot 3", "REST API", "MySQL 8", "JPA", "JWT", "Microservices", "Docker", ".NET Core", "SQL Server"],
-      icon: Car,
-      gradient: "from-blue-500 to-cyan-500",
-      modal: VehicleConfigModel,
-      buttons: [],
-      status: "Completed",
-      date: "2024"
-    },
-    {
-      title: "Feed App", 
-      description: "Social media feed application with real-time updates, featuring a modern React frontend and Spring Boot backend.",
-      technologies: ["Spring Boot 3", "REST API", "MySQL 8", "JPA", "React", "Javascript"],
-      icon: MessageSquare,
-      gradient: "from-purple-500 to-pink-500",
-      modal: FeedModel,
-      buttons: [],
-      status: "Completed",
-      date: "2024"
-    },
-    {
-      title: "CertifyMe",
-      description: "Certificate generation and management platform with beautiful UI and responsive design.",
-      technologies: ["React", "JavaScript", "Tailwind CSS"],
-      icon: Award,
-      gradient: "from-green-500 to-emerald-500",
-      modal: CertifyMeModal,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://certify-me-liart.vercel.app/"
-        }
-      ],
-      status: "Live",
-      date: "2024"
-    },
-    {
-      title: "Employee Details Management",
-      description: "Full-stack MERN application for managing employee records with CRUD operations and authentication.",
-      technologies: ["React", "JavaScript", "MongoDB", "Express.js", "Node.js"],
-      icon: Users,
-      gradient: "from-orange-500 to-red-500",
-      modal: EmployeeDetailsModal,
-      buttons: [
-        {
-          text: "View Live", 
-          url: "https://employee-details-management.onrender.com/"
-        }
-      ],
-      status: "Live",
-      date: "2024"
-    },
-    {
-      title: "CadScript",
-      description: "Interactive CAD scripting platform with code editor and real-time preview capabilities.",
-      technologies: ["React", "JavaScript", "Tailwind CSS"],
-      icon: FileCode,
-      gradient: "from-indigo-500 to-purple-500",
-      modal: CadScriptModal,
-      buttons: [
-        {
-          text: "View Live",
-          url: "https://cad-script.vercel.app/"
-        }
-      ],
-      status: "Live",
-      date: "2024"
-    }
-  ];
-
   useEffect(() => {
-    // Simulate initial loading
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    async function fetchProjects() {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('sort_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching projects:', error);
+      } else {
+        setProjects(data || []);
+      }
+      setLoading(false);
+    }
+    fetchProjects();
   }, []);
 
   if (loading) {
@@ -294,10 +64,19 @@ function Projects() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {projects.map((project, index) => {
-          const ModalComponent = project.modal;
-          const IconComponent = project.icon;
-          const hasModal = ModalComponent !== null;
+          const IconComponent = iconMap[project.icon_name] || FileCode;
+          const ModalComponent = project.modal_reference ? modalMap[project.modal_reference] : null;
+          const hasModal = ModalComponent !== null && ModalComponent !== undefined;
           
+          // Build buttons array from URLs
+          const buttons = [];
+          if (project.live_url) {
+            buttons.push({ text: "View Live", url: project.live_url });
+          }
+          if (project.github_url) {
+            buttons.push({ text: "GitHub", url: project.github_url });
+          }
+
           // Status badge color
           const statusColor = project.status === "Live" 
             ? "badge-success" 
@@ -305,7 +84,7 @@ function Projects() {
           
           return (
             <AnimatedSection
-              key={index}
+              key={project.id}
               animation="fadeInUp"
               delay={index * 150}
               duration={600}
@@ -357,7 +136,7 @@ function Projects() {
                   </div>
 
                   <div className="card-actions justify-start mt-auto flex-wrap gap-2">
-                    {project.buttons.map((button, btnIndex) => (
+                    {buttons.map((button, btnIndex) => (
                       <button
                         key={btnIndex}
                         className="btn btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"

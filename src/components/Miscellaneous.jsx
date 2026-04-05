@@ -1,38 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, GitBranch, Terminal } from "lucide-react";
+import { supabase } from "../lib/supabase";
+
+// Map icon name strings to actual lucide-react components
+const iconMap = { Container, GitBranch, Terminal };
 
 function Miscellaneous() {
-  const skills = [
-    {
-      name: "Docker",
-      description: "Docker is a containerization platform for building, shipping, and running applications.",
-      icon: Container,
-      gradient: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-950/20"
-    },
-    {
-      name: "Git",
-      description: "Git is a distributed version control system for tracking changes in source code.",
-      icon: GitBranch,
-      gradient: "from-orange-500 to-red-500",
-      bgColor: "bg-orange-50 dark:bg-orange-950/20"
-    },
-    {
-      name: "Bash",
-      description: "Bash is a Unix shell and command language for system administration and scripting.",
-      icon: Terminal,
-      gradient: "from-green-500 to-emerald-600",
-      bgColor: "bg-green-50 dark:bg-green-950/20"
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSkills() {
+      const { data, error } = await supabase
+        .from('skills')
+        .select('*')
+        .eq('category', 'other')
+        .order('sort_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching other skills:', error);
+      } else {
+        setSkills(data || []);
+      }
+      setLoading(false);
     }
-  ];
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="card bg-base-100 shadow-lg animate-pulse overflow-hidden">
+            <div className="h-24 bg-base-300"></div>
+            <div className="card-body p-5">
+              <div className="h-5 bg-base-300 rounded w-24 mb-2"></div>
+              <div className="h-4 bg-base-300 rounded w-full"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {skills.map((skill, index) => {
-        const IconComponent = skill.icon;
+      {skills.map((skill) => {
+        const IconComponent = iconMap[skill.icon_name] || Terminal;
         return (
           <div 
-            key={index}
+            key={skill.id}
             className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 overflow-hidden group"
           >
             {/* Gradient header */}
