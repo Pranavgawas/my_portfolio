@@ -1,58 +1,76 @@
-import React from 'react'
+import React from 'react';
+import { Award, ExternalLink, X, Image as ImageIcon, Download } from 'lucide-react';
 
 function CertifyMeModal() {
-    const CertifyMe = () => {
-        const modal = document.getElementById("CertifyMe");
-        if (modal) {
-            modal.showModal();
-        }
-    };
-    return (
-        <>
-            <button className="btn btn-primary" onClick={CertifyMe}>
-                Learn More!
-            </button>
-            <dialog id="CertifyMe" className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">CertifyMe</h3>
-                    <p className="py-4">
-                        <ul>
-                            <li>I have created a website using React and JavaScript that generates certificates, which you can download as image files.</li>
-                            <li>To get started, you need to enter your name and the event name. Once the image is generated, please allow a few minutes before downloading the PDF.</li>
-                        </ul>
-                    </p>
+  const openModal = () => {
+    const modal = document.getElementById("CertifyMe");
+    if (modal) {
+      modal.showModal();
+    }
+  };
 
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button
-                                className="btn mr-2"
-                                onClick={() => {
-                                    window.open(
-                                        "https://certify-me-liart.vercel.app/",
-                                        "_blank"
-                                    );
-                                }}
-                            >
-                                View Website
-                            </button>
-                            <button
-                                className="btn btn-primary mr-2"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const modal = document.getElementById("CertifyMe");
-                                    if (modal) {
-                                        modal.close();
-                                    }
-                                }}
-                            >
-                                Close
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
-        </>
-    )
+  return (
+    <>
+      <button 
+        className="neo-btn py-2 px-4 text-xs flex items-center gap-2" 
+        onClick={openModal}
+      >
+        Learn More
+      </button>
+      <dialog id="CertifyMe" className="modal modal-bottom sm:modal-middle backdrop-blur-sm">
+        <div className="modal-box neo-glass !bg-neo-bg-secondary/90 border-white/10 p-0 overflow-hidden max-w-2xl">
+          {/* Header */}
+          <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/5">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-neo-pink/20 text-neo-pink">
+                <Award className="w-5 h-5" />
+              </div>
+              <h3 className="font-bold text-xl text-white">CertifyMe</h3>
+            </div>
+            <form method="dialog">
+              <button className="p-2 hover:bg-white/5 rounded-full transition-colors text-neo-text-muted">
+                <X className="w-5 h-5" />
+              </button>
+            </form>
+          </div>
+
+          <div className="p-8 space-y-6">
+            <p className="text-neo-text-secondary leading-relaxed text-sm">
+              An automated certificate generation platform that creates high-quality credentials based on user input, downloadable in multiple formats.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                <h4 className="text-[10px] uppercase tracking-widest text-neo-pink font-bold mb-2">Capabilities</h4>
+                <ul className="text-xs text-neo-text-muted space-y-2">
+                  <li className="flex items-center gap-2"><ImageIcon className="w-3 h-3 text-neo-pink" /> Instant Image Generation</li>
+                  <li className="flex items-center gap-2"><Download className="w-3 h-3 text-neo-pink" /> PDF Export Support</li>
+                </ul>
+              </div>
+              <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                <h4 className="text-[10px] uppercase tracking-widest text-neo-cyan font-bold mb-2">Usage</h4>
+                <p className="text-xs text-neo-text-muted leading-relaxed">
+                  Enter participant name and event details to generate a unique, professional certificate instantly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-6 bg-white/5 border-t border-white/5 flex justify-between items-center">
+            <button
+              className="neo-btn-outline py-2 px-4 text-xs flex items-center gap-2"
+              onClick={() => window.open("https://certify-me-liart.vercel.app/", "_blank")}
+            >
+              <ExternalLink className="w-3 h-3" /> Visit App
+            </button>
+            <form method="dialog">
+              <button className="neo-btn py-2 px-6 text-sm">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </>
+  );
 }
 
-export default CertifyMeModal
+export default CertifyMeModal;

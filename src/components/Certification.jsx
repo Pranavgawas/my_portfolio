@@ -9,76 +9,59 @@ import {
   ShieldCheck
 } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { supabase } from "../lib/supabase";
+
+const iconMap = {
+  Settings,
+  BookOpen,
+  Code2,
+  Zap,
+  Palette,
+  ShieldCheck
+};
 
 function Certification() {
+  const [certifications, setCertifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
+    async function fetchCertifications() {
+      try {
+        const { data, error } = await supabase
+          .from('certifications')
+          .select('*')
+          .order('sort_order', { ascending: true });
+
+        if (!error && data) {
+          setCertifications(data);
+        }
+      } catch (err) {
+        console.error('Error fetching certifications:', err);
+      }
+      setLoading(false);
+    }
+    fetchCertifications();
   }, []);
 
   const handleLink = (url) => {
     window.open(url, "_blank");
   };
 
-  const certifications = [
-    {
-      title: "Hardware and Networking",
-      issuer: "Professional Certification",
-      description: "Advanced architecture and network infrastructure protocols.",
-      url: "https://drive.google.com/file/d/14lMUVkzOm1QGJKpFYbO2GKNqYTDvJwXf/view",
-      icon: Settings,
-      color: "text-blue-400",
-      glow: "rgba(59,130,246,0.5)"
-    },
-    {
-      title: "Precat Certification",
-      issuer: "Academic Badge",
-      description: "Validation of analytical and logical reasoning proficiency.",
-      url: "https://drive.google.com/file/d/1iDZCrAr-jyE9i5yI4TtGXaXUCIzwubt_/view",
-      icon: BookOpen,
-      color: "text-green-400",
-      glow: "rgba(34,197,94,0.5)"
-    },
-    {
-      title: "HackerRank Verified",
-      issuer: "HackerRank",
-      description: "Problem solving and algorithms implementation.",
-      url: "https://www.hackerrank.com/profile/pranavgawas1999",
-      icon: Code2,
-      color: "text-emerald-400",
-      glow: "rgba(16,185,129,0.5)"
-    },
-    {
-      title: "LeetCode Proficiency",
-      issuer: "LeetCode",
-      description: "Data Structures and algorithm complexity analysis.",
-      url: "https://leetcode.com/pranavgawas1999/",
-      icon: Zap,
-      color: "text-yellow-400",
-      glow: "rgba(250,204,21,0.5)"
-    },
-    {
-      title: "Autodesk CAD/CAM/CAE",
-      issuer: "Coursera / Autodesk",
-      description: "Specialization in digital manufacturing and design.",
-      url: "https://www.coursera.org/account/accomplishments/specialization/YL7UHT3T6MXB",
-      icon: Palette,
-      color: "text-neo-purple",
-      glow: "rgba(139,92,246,0.5)"
-    }
-  ];
-
-  if (loading) return null;
+  if (loading) return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[1, 2, 3].map(i => (
+        <div key={i} className="neo-glass h-64 animate-pulse opacity-50" />
+      ))}
+    </div>
+  );
 
   return (
     <div id="certificateId" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {certifications.map((cert, index) => {
-        const Icon = cert.icon;
+        const Icon = iconMap[cert.icon_name] || ShieldCheck;
         return (
           <AnimatedSection
-            key={index}
+            key={cert.id || index}
             animation="fadeInUp"
             delay={index * 100}
           >

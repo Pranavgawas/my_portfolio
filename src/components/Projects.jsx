@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import VehicleConfigModel from "./Modal/VehicleConfigModel";
-import FeedModel from "./Modal/FeedModel";
-import CertifyMeModal from "./Modal/CertifyMeModal";
-import EmployeeDetailsModal from "./Modal/EmployeeDetailsModal";
-import CadScriptModal from "./Modal/CadScriptModal";
+import ProjectModal from "./Modal/ProjectModal";
 import AnimatedSection from "./AnimatedSection";
 import { supabase } from "../lib/supabase";
-import { fallbackProjects } from "../data/fallbackData";
 import {
   Car, MessageSquare, Award, Users, FileCode,
   ExternalLink, Code2, Sparkles, Palette,
@@ -17,14 +12,6 @@ import {
 const iconMap = {
   Car, MessageSquare, Award, Users, FileCode,
   Code2, Sparkles, Palette, ExternalLink, Layout
-};
-
-const modalMap = {
-  VehicleConfigModel,
-  FeedModel,
-  CertifyMeModal,
-  EmployeeDetailsModal,
-  CadScriptModal
 };
 
 function Projects() {
@@ -39,26 +26,29 @@ function Projects() {
           .select('*')
           .order('sort_order', { ascending: true });
 
-        if (error || !data || data.length === 0) {
-          setProjects(fallbackProjects);
-        } else {
+        if (!error && data) {
           setProjects(data);
         }
       } catch (err) {
-        setProjects(fallbackProjects);
+        console.error('Error fetching projects:', err);
       }
       setLoading(false);
     }
     fetchProjects();
   }, []);
 
-  if (loading) return null;
+  if (loading) return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[1, 2, 3].map(i => (
+        <div key={i} className="neo-glass h-[400px] animate-pulse opacity-50" />
+      ))}
+    </div>
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((project, index) => {
         const IconComponent = iconMap[project.icon_name] || FileCode;
-        const ModalComponent = project.modal_reference ? modalMap[project.modal_reference] : null;
         
         return (
           <AnimatedSection
@@ -71,7 +61,7 @@ function Projects() {
               className="neo-glass group h-full flex flex-col overflow-hidden border-white/5 hover:border-neo-purple/30 transition-all duration-500"
             >
               {/* Card Header/Icon Area */}
-              <div className={`relative h-48 flex items-center justify-center overflow-hidden bg-gradient-to-br ${project.gradient}`}>
+              <div className={`relative h-48 flex items-center justify-center overflow-hidden bg-gradient-to-br ${project.gradient || 'from-neo-purple/20 to-neo-cyan/20'}`}>
                 <div className="absolute inset-0 bg-neo-bg-primary/20 backdrop-blur-[2px]" />
                 
                 {/* Decorative Pattern */}
@@ -89,7 +79,7 @@ function Projects() {
                 {/* Status Badge */}
                 <div className="absolute top-4 right-4 z-20">
                   <span className={`neo-badge py-1 px-3 text-[10px] ${project.status === 'Live' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-neo-cyan/20 text-neo-cyan border-neo-cyan/30'}`}>
-                    {project.status}
+                    {project.status || 'Active'}
                   </span>
                 </div>
               </div>
@@ -111,12 +101,12 @@ function Projects() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                  {project.technologies.slice(0, 3).map((tech, i) => (
+                  {project.technologies?.slice(0, 3).map((tech, i) => (
                     <span key={i} className="text-[10px] font-mono py-1 px-2 rounded-md bg-white/5 border border-white/10 text-neo-text-muted">
                       {tech}
                     </span>
                   ))}
-                  {project.technologies.length > 3 && (
+                  {project.technologies?.length > 3 && (
                     <span className="text-[10px] font-mono py-1 px-2 text-neo-text-muted">
                       +{project.technologies.length - 3}
                     </span>
@@ -125,15 +115,8 @@ function Projects() {
 
                 {/* Actions */}
                 <div className="flex items-center gap-3">
-                  {project.live_url && (
-                    <button
-                      onClick={() => window.open(project.live_url, "_blank")}
-                      className="neo-btn py-2 px-4 text-xs flex items-center gap-2 flex-1"
-                    >
-                      <ArrowUpRight className="w-3 h-3" />
-                      Live Demo
-                    </button>
-                  )}
+                  <ProjectModal project={project} />
+                  
                   {project.github_url && (
                     <button
                       onClick={() => window.open(project.github_url, "_blank")}
@@ -142,11 +125,6 @@ function Projects() {
                     >
                       <Github className="w-3 h-3" />
                     </button>
-                  )}
-                  {ModalComponent && (
-                    <div className="ml-auto">
-                      <ModalComponent />
-                    </div>
                   )}
                 </div>
               </div>

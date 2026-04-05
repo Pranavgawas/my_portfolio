@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Code2, Terminal, Sparkles, Rocket, Cpu, Globe, ChevronRight } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
 import { supabase } from '../lib/supabase';
-import { fallbackHero } from '../data/fallbackData';
 
 function Hero() {
   const [heroData, setHeroData] = useState(null);
@@ -18,20 +17,22 @@ function Hero() {
           .limit(1)
           .single();
 
-        if (error || !data) {
-          setHeroData(fallbackHero);
-        } else {
+        if (!error && data) {
           setHeroData(data);
         }
       } catch (err) {
-        setHeroData(fallbackHero);
+        console.error('Error fetching hero content:', err);
       }
       setLoading(false);
     }
     fetchHeroContent();
   }, []);
 
-  if (loading || !heroData) return null;
+  if (loading || !heroData) return (
+    <div className="min-h-screen flex items-center justify-center bg-neo-bg-primary">
+      <div className="w-12 h-12 border-4 border-neo-purple border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
 
   const titleWords = heroData.heading.split(" ");
 

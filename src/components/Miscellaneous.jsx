@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, GitBranch, Terminal, Globe, Award, Sparkles } from "lucide-react";
 import { supabase } from "../lib/supabase";
-import { fallbackSkills } from "../data/fallbackData";
 import AnimatedSection from "./AnimatedSection";
 
 const iconMap = { Container, GitBranch, Terminal, Globe, Award, Sparkles };
@@ -19,20 +18,24 @@ function Miscellaneous() {
           .eq('category', 'other')
           .order('sort_order', { ascending: true });
 
-        if (error || !data || data.length === 0) {
-          setSkills(fallbackSkills.filter(s => s.category === 'other'));
-        } else {
+        if (!error && data) {
           setSkills(data);
         }
       } catch (err) {
-        setSkills(fallbackSkills.filter(s => s.category === 'other'));
+        console.error('Error fetching skills:', err);
       }
       setLoading(false);
     }
     fetchSkills();
   }, []);
 
-  if (loading) return null;
+  if (loading) return (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {[1, 2, 3, 4].map(i => (
+        <div key={i} className="neo-glass h-40 animate-pulse opacity-50" />
+      ))}
+    </div>
+  );
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
