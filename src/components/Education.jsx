@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import { fallbackEducation } from "../data/fallbackData";
 
 function Education() {
   const [educationList, setEducationList] = useState([]);
@@ -7,15 +8,38 @@ function Education() {
 
   useEffect(() => {
     async function fetchEducation() {
-      const { data, error } = await supabase
-        .from('education')
-        .select('*')
-        .order('sort_order', { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from('education')
+          .select('*')
+          .order('sort_order', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching education:', error);
-      } else {
-        setEducationList(data || []);
+        if (error || !data || data.length === 0) {
+          console.warn('Education data not found or Supabase error. Using fallback data.');
+          // Map fallback data to match table schema if necessary
+          const mappedFallback = fallbackEducation.map((edu, idx) => ({
+            id: `fallback-${idx}`,
+            year: edu.year,
+            title: edu.degree,
+            details: edu.description,
+            certificate_url: null,
+            sort_order: idx
+          }));
+          setEducationList(mappedFallback);
+        } else {
+          setEducationList(data);
+        }
+      } catch (err) {
+        console.error('Connection error in education. Using fallback data.');
+        const mappedFallback = fallbackEducation.map((edu, idx) => ({
+          id: `fallback-${idx}`,
+          year: edu.year,
+          title: edu.degree,
+          details: edu.description,
+          certificate_url: null,
+          sort_order: idx
+        }));
+        setEducationList(mappedFallback);
       }
       setLoading(false);
     }

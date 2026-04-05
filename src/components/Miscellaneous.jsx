@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, GitBranch, Terminal } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { fallbackSkills } from "../data/fallbackData";
 
 // Map icon name strings to actual lucide-react components
 const iconMap = { Container, GitBranch, Terminal };
@@ -11,16 +12,22 @@ function Miscellaneous() {
 
   useEffect(() => {
     async function fetchSkills() {
-      const { data, error } = await supabase
-        .from('skills')
-        .select('*')
-        .eq('category', 'other')
-        .order('sort_order', { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from('skills')
+          .select('*')
+          .eq('category', 'other')
+          .order('sort_order', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching other skills:', error);
-      } else {
-        setSkills(data || []);
+        if (error || !data || data.length === 0) {
+          console.warn('Other skills not found or Supabase error. Using fallback data.');
+          setSkills(fallbackSkills.filter(s => s.category === 'other'));
+        } else {
+          setSkills(data);
+        }
+      } catch (err) {
+        console.error('Connection error in other skills. Using fallback data.');
+        setSkills(fallbackSkills.filter(s => s.category === 'other'));
       }
       setLoading(false);
     }

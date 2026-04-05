@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Code2, Terminal, Sparkles } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
 import { supabase } from '../lib/supabase';
+import { fallbackHero } from '../data/fallbackData';
 
 function Hero() {
   const [heroData, setHeroData] = useState(null);
@@ -9,16 +10,22 @@ function Hero() {
 
   useEffect(() => {
     async function fetchHeroContent() {
-      const { data, error } = await supabase
-        .from('hero_content')
-        .select('*')
-        .limit(1)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('hero_content')
+          .select('*')
+          .limit(1)
+          .single();
 
-      if (error) {
-        console.error('Error fetching hero content:', error);
-      } else {
-        setHeroData(data);
+        if (error || !data) {
+          console.warn('Hero content not found or Supabase error. Using fallback data.');
+          setHeroData(fallbackHero);
+        } else {
+          setHeroData(data);
+        }
+      } catch (err) {
+        console.error('Connection error. Using fallback data.');
+        setHeroData(fallbackHero);
       }
       setLoading(false);
     }

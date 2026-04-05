@@ -7,15 +7,17 @@ import CadScriptModal from "./Modal/CadScriptModal";
 import AnimatedSection from "./AnimatedSection";
 import { SkeletonCard } from "./SkeletonLoaders";
 import { supabase } from "../lib/supabase";
+import { fallbackProjects } from "../data/fallbackData";
 import {
   Car, MessageSquare, Award, Users, FileCode,
-  ExternalLink, Code2, Sparkles, Palette
+  ExternalLink, Code2, Sparkles, Palette,
+  Layout // added Layout icon for fallback
 } from "lucide-react";
 
 // Map icon name strings to actual lucide-react components
 const iconMap = {
   Car, MessageSquare, Award, Users, FileCode,
-  Code2, Sparkles, Palette, ExternalLink
+  Code2, Sparkles, Palette, ExternalLink, Layout
 };
 
 // Map modal reference strings to actual modal components
@@ -33,15 +35,21 @@ function Projects() {
 
   useEffect(() => {
     async function fetchProjects() {
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('sort_order', { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('sort_order', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching projects:', error);
-      } else {
-        setProjects(data || []);
+        if (error || !data || data.length === 0) {
+          console.warn('Projects not found or Supabase error. Using fallback data.');
+          setProjects(fallbackProjects);
+        } else {
+          setProjects(data);
+        }
+      } catch (err) {
+        console.error('Connection error in projects. Using fallback data.');
+        setProjects(fallbackProjects);
       }
       setLoading(false);
     }

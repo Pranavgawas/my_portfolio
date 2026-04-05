@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Coffee, Code2, Zap, Braces, Database } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { fallbackSkills } from "../data/fallbackData";
 
 // Map icon name strings to actual lucide-react components
 const iconMap = { Coffee, Code2, Zap, Braces, Database };
@@ -11,16 +12,22 @@ function ProgrammingSkills() {
 
   useEffect(() => {
     async function fetchSkills() {
-      const { data, error } = await supabase
-        .from('skills')
-        .select('*')
-        .eq('category', 'programming')
-        .order('sort_order', { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from('skills')
+          .select('*')
+          .eq('category', 'programming')
+          .order('sort_order', { ascending: true });
 
-      if (error) {
-        console.error('Error fetching programming skills:', error);
-      } else {
-        setSkills(data || []);
+        if (error || !data || data.length === 0) {
+          console.warn('Programming skills not found or Supabase error. Using fallback data.');
+          setSkills(fallbackSkills.filter(s => s.category === 'programming'));
+        } else {
+          setSkills(data);
+        }
+      } catch (err) {
+        console.error('Connection error in skills. Using fallback data.');
+        setSkills(fallbackSkills.filter(s => s.category === 'programming'));
       }
       setLoading(false);
     }
