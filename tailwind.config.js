@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'neo-purple': '#8B5CF6',
+        'neo-cyan': '#06B6D4',
+        'neo-pink': '#EC4899',
+      },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'fade-in-up': 'fadeInUp 0.6s ease-out',
@@ -15,6 +20,7 @@ export default {
         'scale-in': 'scaleIn 0.5s ease-out',
         'slide-in-left': 'slideInLeft 0.6s ease-out',
         'slide-in-right': 'slideInRight 0.6s ease-out',
+        'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -40,6 +46,10 @@ export default {
         slideInRight: {
           '0%': { opacity: '0', transform: 'translateX(30px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' }
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
         }
       },
       transitionDuration: {
@@ -52,6 +62,21 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: [
+      {
+        "neo-dark": {
+          "primary": "#8B5CF6",
+          "secondary": "#06B6D4",
+          "accent": "#EC4899",
+          "neutral": "#0f0f2a",
+          "base-100": "#0a0a1a",
+          "info": "#3abff8",
+          "success": "#36d399",
+          "warning": "#fbbd23",
+          "error": "#f87272",
+        },
+      },
+      "dark",
+    ],
   },
 };

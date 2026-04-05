@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import VehicleConfigModel from "./Modal/VehicleConfigModel";
 import FeedModel from "./Modal/FeedModel";
 import CertifyMeModal from "./Modal/CertifyMeModal";
 import EmployeeDetailsModal from "./Modal/EmployeeDetailsModal";
 import CadScriptModal from "./Modal/CadScriptModal";
 import AnimatedSection from "./AnimatedSection";
-import { SkeletonCard } from "./SkeletonLoaders";
 import { supabase } from "../lib/supabase";
 import { fallbackProjects } from "../data/fallbackData";
 import {
   Car, MessageSquare, Award, Users, FileCode,
   ExternalLink, Code2, Sparkles, Palette,
-  Layout // added Layout icon for fallback
+  Layout, Github, ArrowUpRight
 } from "lucide-react";
 
-// Map icon name strings to actual lucide-react components
 const iconMap = {
   Car, MessageSquare, Award, Users, FileCode,
   Code2, Sparkles, Palette, ExternalLink, Layout
 };
 
-// Map modal reference strings to actual modal components
 const modalMap = {
   VehicleConfigModel,
   FeedModel,
@@ -42,13 +40,11 @@ function Projects() {
           .order('sort_order', { ascending: true });
 
         if (error || !data || data.length === 0) {
-          console.warn('Projects not found or Supabase error. Using fallback data.');
           setProjects(fallbackProjects);
         } else {
           setProjects(data);
         }
       } catch (err) {
-        console.error('Connection error in projects. Using fallback data.');
         setProjects(fallbackProjects);
       }
       setLoading(false);
@@ -56,113 +52,108 @@ function Projects() {
     fetchProjects();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {[...Array(5)].map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (loading) return null;
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-        {projects.map((project, index) => {
-          const IconComponent = iconMap[project.icon_name] || FileCode;
-          const ModalComponent = project.modal_reference ? modalMap[project.modal_reference] : null;
-          const hasModal = ModalComponent !== null && ModalComponent !== undefined;
-          
-          // Build buttons array from URLs
-          const buttons = [];
-          if (project.live_url) {
-            buttons.push({ text: "View Live", url: project.live_url });
-          }
-          if (project.github_url) {
-            buttons.push({ text: "GitHub", url: project.github_url });
-          }
-
-          // Status badge color
-          const statusColor = project.status === "Live" 
-            ? "badge-success" 
-            : "badge-info";
-          
-          return (
-            <AnimatedSection
-              key={project.id}
-              animation="fadeInUp"
-              delay={index * 150}
-              duration={600}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project, index) => {
+        const IconComponent = iconMap[project.icon_name] || FileCode;
+        const ModalComponent = project.modal_reference ? modalMap[project.modal_reference] : null;
+        
+        return (
+          <AnimatedSection
+            key={project.id}
+            animation="fadeInUp"
+            delay={index * 100}
+          >
+            <motion.article 
+              whileHover={{ y: -10 }}
+              className="neo-glass group h-full flex flex-col overflow-hidden border-white/5 hover:border-neo-purple/30 transition-all duration-500"
             >
-              <article className="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-primary/30 h-full">
-                {/* Icon header with gradient */}
-                <div className={`relative overflow-hidden bg-gradient-to-br ${project.gradient} p-8 sm:p-10`}>
-                  <div className="absolute inset-0 bg-black/10" aria-hidden="true"></div>
-                  <div className="relative z-10 flex justify-between items-start">
-                    <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
-                      <IconComponent className="w-12 h-12 sm:w-16 sm:h-16 text-white" strokeWidth={1.5} aria-hidden="true" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <span className={`badge ${statusColor} badge-sm text-white`}>
-                        {project.status}
-                      </span>
-                      <span className="badge badge-outline badge-sm bg-white/20 text-white border-white/40">
-                        {project.date}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+              {/* Card Header/Icon Area */}
+              <div className={`relative h-48 flex items-center justify-center overflow-hidden bg-gradient-to-br ${project.gradient}`}>
+                <div className="absolute inset-0 bg-neo-bg-primary/20 backdrop-blur-[2px]" />
+                
+                {/* Decorative Pattern */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '12px 12px' }} />
+                
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="relative z-10 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl"
+                >
+                  <IconComponent className="w-12 h-12 text-white" strokeWidth={1.5} />
+                </motion.div>
 
-                <div className="card-body p-5 sm:p-6">
-                  <h3 className="card-title text-xl sm:text-2xl font-bold text-base-content mb-3 flex items-center gap-2">
+                {/* Status Badge */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className={`neo-badge py-1 px-3 text-[10px] ${project.status === 'Live' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-neo-cyan/20 text-neo-cyan border-neo-cyan/30'}`}>
+                    {project.status}
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-bold text-white group-hover:text-neo-purple transition-colors">
                     {project.title}
                   </h3>
-                  
-                  <p className="text-sm sm:text-base text-base-content/80 leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4" role="list" aria-label="Technologies used">
-                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
-                      <span 
-                        key={techIndex}
-                        className="badge badge-sm badge-outline text-xs"
-                        role="listitem"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <span className="badge badge-sm badge-outline text-xs" role="listitem">
-                        +{project.technologies.length - 4} more
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="card-actions justify-start mt-auto flex-wrap gap-2">
-                    {buttons.map((button, btnIndex) => (
-                      <button
-                        key={btnIndex}
-                        className="btn btn-sm sm:btn-md min-h-[44px] px-4 sm:px-6 text-sm sm:text-base gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                        onClick={() => window.open(button.url, "_blank")}
-                        aria-label={`${button.text} for ${project.title}`}
-                      >
-                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                        {button.text}
-                      </button>
-                    ))}
-                    {hasModal && <ModalComponent />}
-                  </div>
+                  <span className="text-[10px] font-mono text-neo-text-muted mt-1 uppercase">
+                    {project.date}
+                  </span>
                 </div>
-              </article>
-            </AnimatedSection>
-          );
-        })}
-      </div>
+                
+                <p className="text-neo-text-secondary text-sm leading-relaxed mb-6 line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-8 mt-auto">
+                  {project.technologies.slice(0, 3).map((tech, i) => (
+                    <span key={i} className="text-[10px] font-mono py-1 px-2 rounded-md bg-white/5 border border-white/10 text-neo-text-muted">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <span className="text-[10px] font-mono py-1 px-2 text-neo-text-muted">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-3">
+                  {project.live_url && (
+                    <button
+                      onClick={() => window.open(project.live_url, "_blank")}
+                      className="neo-btn py-2 px-4 text-xs flex items-center gap-2 flex-1"
+                    >
+                      <ArrowUpRight className="w-3 h-3" />
+                      Live Demo
+                    </button>
+                  )}
+                  {project.github_url && (
+                    <button
+                      onClick={() => window.open(project.github_url, "_blank")}
+                      className="neo-btn-outline py-2 px-4 text-xs flex items-center gap-2"
+                      title="GitHub Repository"
+                    >
+                      <Github className="w-3 h-3" />
+                    </button>
+                  )}
+                  {ModalComponent && (
+                    <div className="ml-auto">
+                      <ModalComponent />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.article>
+          </AnimatedSection>
+        );
+      })}
     </div>
   );
 }

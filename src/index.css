@@ -2,162 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --neo-bg: #030014;
+  --neo-bg-secondary: #05011d;
+  --neo-purple: #8b5cf6;
+  --neo-cyan: #06b6d4;
+  --neo-pink: #ec4899;
+  --neo-glass-bg: rgba(255, 255, 255, 0.03);
+  --neo-glass-border: rgba(255, 255, 255, 0.08);
+  --neo-text-primary: #ffffff;
+  --neo-text-secondary: #94a3b8;
+  --neo-text-muted: #64748b;
+}
+
 @layer base {
-  /* Smooth scrolling for the whole page */
   html {
     scroll-behavior: smooth;
+    background-color: var(--neo-bg);
+    color: var(--neo-text-primary);
   }
 
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Custom scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-base-200;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary/50 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
-  }
-
-  /* Improve text rendering */
   body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply antialiased;
+    background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
   }
 
-  /* Focus visible for accessibility */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-primary;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--neo-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--neo-purple);
+  }
+}
+
+@layer components {
+  .neo-glass {
+    @apply backdrop-blur-xl rounded-[2rem] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
   }
 
-  /* Screen reader only class */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  .neo-badge {
+    @apply px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border border-white/10 bg-white/5 backdrop-blur-md;
   }
 
-  .sr-only:focus-visible {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: inherit;
-    margin: inherit;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
+  .neo-btn {
+    @apply relative px-6 py-3 rounded-2xl font-bold transition-all duration-500 overflow-hidden;
+    background: linear-gradient(135deg, var(--neo-purple) 0%, var(--neo-cyan) 100%);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  }
+
+  .neo-btn::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, var(--neo-cyan) 0%, var(--neo-purple) 100%);
+  }
+
+  .neo-btn:hover {
+    @apply -translate-y-1 shadow-[0_8px_25px_rgba(139,92,246,0.5)];
+  }
+
+  .neo-btn:hover::before {
+    @apply opacity-100;
+  }
+
+  .neo-btn-outline {
+    @apply px-6 py-3 rounded-2xl font-bold border border-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md bg-white/5;
+  }
+
+  .neo-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neo-purple via-neo-cyan to-neo-pink;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
   }
 }
 
 @layer utilities {
-  /* Gradient text utility */
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
-  }
-
-  /* Glass morphism effect */
-  .glass-effect {
-    @apply backdrop-blur-md bg-white/10 border border-white/20;
-  }
-
-  /* Card hover effect */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
-  }
-
-  /* Animated gradient background */
-  .animated-gradient {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
-
-  @keyframes gradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  /* Pulse animation for icons */
-  .pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  /* Shimmer effect for loading */
-  .shimmer {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.1) 50%, 
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
-  /* Fade in animations */
-  .fade-in {
-    animation: fadeIn 0.6s ease-in;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Scale on hover */
-  .scale-hover {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-}
-
-/* Dark mode enhancements */
-@media (prefers-color-scheme: dark) {
-  .gradient-bg-dark {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  }
+  .text-neo-purple { color: var(--neo-purple); }
+  .text-neo-cyan { color: var(--neo-cyan); }
+  .text-neo-pink { color: var(--neo-pink); }
+  .text-neo-text-secondary { color: var(--neo-text-secondary); }
+  .text-neo-text-muted { color: var(--neo-text-muted); }
+  
+  .bg-neo-purple { background-color: var(--neo-purple); }
+  .bg-neo-cyan { background-color: var(--neo-cyan); }
+  .bg-neo-pink { background-color: var(--neo-pink); }
+  
+  .border-neo-purple { border-color: var(--neo-purple); }
 }

@@ -5,138 +5,119 @@ import {
   Code2, 
   Zap, 
   Palette,
-  ExternalLink 
+  ExternalLink,
+  ShieldCheck
 } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
-import { SkeletonCertification } from "./SkeletonLoaders";
 
 function Certification() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleHardwareAndNetworking = () => {
-    window.open(
-      "https://drive.google.com/file/d/14lMUVkzOm1QGJKpFYbO2GKNqYTDvJwXf/view",
-      "_blank"
-    );
-  };
-
-  const handlePrecat = () => {
-    window.open(
-      "https://drive.google.com/file/d/1iDZCrAr-jyE9i5yI4TtGXaXUCIzwubt_/view",
-      "_blank"
-    );
-  };
-
-  const handleHackerRank = () => {
-    window.open("https://www.hackerrank.com/profile/pranavgawas1999", "_blank");
-  };
-
-  const handleLeetCode = () => {
-    window.open("https://leetcode.com/pranavgawas1999/", "_blank");
-  };
-
-  const handleCadCamCae = () => {
-    window.open(
-      "https://www.coursera.org/account/accomplishments/specialization/YL7UHT3T6MXB?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=s12n",
-      "_blank"
-    );
+  const handleLink = (url) => {
+    window.open(url, "_blank");
   };
 
   const certifications = [
     {
       title: "Hardware and Networking",
-      description: "Professional certification in computer hardware and networking",
-      handler: handleHardwareAndNetworking,
+      issuer: "Professional Certification",
+      description: "Advanced architecture and network infrastructure protocols.",
+      url: "https://drive.google.com/file/d/14lMUVkzOm1QGJKpFYbO2GKNqYTDvJwXf/view",
       icon: Settings,
-      color: "text-blue-500"
+      color: "text-blue-400",
+      glow: "rgba(59,130,246,0.5)"
     },
     {
-      title: "Precat",
-      description: "Pre-CAT examination certification",
-      handler: handlePrecat,
+      title: "Precat Certification",
+      issuer: "Academic Badge",
+      description: "Validation of analytical and logical reasoning proficiency.",
+      url: "https://drive.google.com/file/d/1iDZCrAr-jyE9i5yI4TtGXaXUCIzwubt_/view",
       icon: BookOpen,
-      color: "text-green-500"
+      color: "text-green-400",
+      glow: "rgba(34,197,94,0.5)"
     },
     {
-      title: "HackerRank",
-      description: "Programming challenges and coding assessments",
-      handler: handleHackerRank,
+      title: "HackerRank Verified",
+      issuer: "HackerRank",
+      description: "Problem solving and algorithms implementation.",
+      url: "https://www.hackerrank.com/profile/pranavgawas1999",
       icon: Code2,
-      color: "text-emerald-500"
+      color: "text-emerald-400",
+      glow: "rgba(16,185,129,0.5)"
     },
     {
-      title: "LeetCode",
-      description: "Algorithm and data structure problem solving",
-      handler: handleLeetCode,
+      title: "LeetCode Proficiency",
+      issuer: "LeetCode",
+      description: "Data Structures and algorithm complexity analysis.",
+      url: "https://leetcode.com/pranavgawas1999/",
       icon: Zap,
-      color: "text-yellow-500"
+      color: "text-yellow-400",
+      glow: "rgba(250,204,21,0.5)"
     },
     {
       title: "Autodesk CAD/CAM/CAE",
-      description: "Computer-aided design and manufacturing specialization",
-      handler: handleCadCamCae,
+      issuer: "Coursera / Autodesk",
+      description: "Specialization in digital manufacturing and design.",
+      url: "https://www.coursera.org/account/accomplishments/specialization/YL7UHT3T6MXB",
       icon: Palette,
-      color: "text-purple-500"
+      color: "text-neo-purple",
+      glow: "rgba(139,92,246,0.5)"
     }
   ];
 
-  if (loading) {
-    return (
-      <div id="certificateId" className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {[...Array(5)].map((_, index) => (
-            <SkeletonCertification key={index} />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (loading) return null;
 
   return (
-    <div id="certificateId" className="px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {certifications.map((cert, index) => {
-          const IconComponent = cert.icon;
-          return (
-            <AnimatedSection
-              key={index}
-              animation="fadeInUp"
-              delay={index * 100}
-              duration={500}
+    <div id="certificateId" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {certifications.map((cert, index) => {
+        const Icon = cert.icon;
+        return (
+          <AnimatedSection
+            key={index}
+            animation="fadeInUp"
+            delay={index * 100}
+          >
+            <div
+              onClick={() => handleLink(cert.url)}
+              className="neo-glass group p-8 flex flex-col h-full cursor-pointer hover:border-white/20 transition-all duration-500 relative overflow-hidden"
             >
-              <div
-                onClick={cert.handler}
-                className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 p-4 sm:p-6 min-h-[120px] sm:min-h-[140px] border border-base-200 hover:border-primary/20"
-              >
-                <div className="flex items-start gap-3 sm:gap-4">
-                  <div className={`flex-shrink-0 p-2 sm:p-3 rounded-lg bg-base-200/50 ${cert.color}`}>
-                    <IconComponent size={20} className="sm:w-6 sm:h-6" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-sm sm:text-base lg:text-lg text-base-content leading-tight mb-2">
-                      {cert.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-base-content/70 leading-relaxed">
-                      {cert.description}
-                    </p>
-                  </div>
+              {/* Background Glow */}
+              <div 
+                className="absolute -top-10 -right-10 w-32 h-32 blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full"
+                style={{ backgroundColor: cert.glow }}
+              />
+
+              <div className="flex justify-between items-start mb-6">
+                <div className={`p-4 rounded-2xl bg-white/5 ${cert.color} transition-all duration-500 group-hover:scale-110 group-hover:bg-white/10 group-hover:shadow-[0_0_20px_${cert.glow}]`}>
+                  <Icon className="w-8 h-8" strokeWidth={1.5} />
                 </div>
-                <div className="mt-3 sm:mt-4 flex items-center gap-2">
-                  <span className="text-xs sm:text-sm text-primary font-medium">
-                    View Certificate
-                  </span>
-                  <ExternalLink size={14} className="text-primary" />
+                <div className="neo-badge text-neo-text-muted group-hover:border-neo-purple/50 group-hover:text-neo-purple transition-colors">
+                  <ShieldCheck className="w-3 h-3 inline mr-1" /> Verified
                 </div>
               </div>
-            </AnimatedSection>
-          );
-        })}
-      </div>
+
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-neo-purple transition-colors">
+                  {cert.title}
+                </h3>
+                <p className="text-neo-text-muted text-xs font-mono mb-4 uppercase tracking-wider">{cert.issuer}</p>
+                <p className="text-neo-text-secondary text-sm leading-relaxed">
+                  {cert.description}
+                </p>
+              </div>
+
+              <div className="mt-8 flex items-center gap-2 text-neo-purple font-bold text-sm tracking-wider opacity-60 group-hover:opacity-100 transition-opacity">
+                VIEW CREDENTIAL <ExternalLink className="w-4 h-4 translate-y-[-1px]" />
+              </div>
+            </div>
+          </AnimatedSection>
+        );
+      })}
     </div>
   );
 }

@@ -1,0 +1,329 @@
+/* ============================================
+   NEO GLASSMORPHISM DESIGN SYSTEM
+   Portfolio 2.0 — Cyber Purple Dark Theme
+   ============================================ */
+
+/* === ROOT VARIABLES === */
+:root {
+  --neo-bg-primary: #0a0a1a;
+  --neo-bg-secondary: #0f0f2a;
+  --neo-bg-card: rgba(15, 15, 42, 0.6);
+  --neo-purple: #8B5CF6;
+  --neo-purple-light: #A78BFA;
+  --neo-purple-dark: #7C3AED;
+  --neo-purple-glow: rgba(139, 92, 246, 0.4);
+  --neo-cyan: #06B6D4;
+  --neo-pink: #EC4899;
+  --neo-border: rgba(139, 92, 246, 0.15);
+  --neo-border-hover: rgba(139, 92, 246, 0.4);
+  --neo-text-primary: #F1F5F9;
+  --neo-text-secondary: rgba(241, 245, 249, 0.6);
+  --neo-text-muted: rgba(241, 245, 249, 0.4);
+  --neo-blur: 20px;
+  --neo-blur-strong: 40px;
+}
+
+/* === NEO GLASS CONTAINERS === */
+.neo-glass {
+  background: rgba(15, 15, 42, 0.4);
+  backdrop-filter: blur(var(--neo-blur));
+  -webkit-backdrop-filter: blur(var(--neo-blur));
+  border: 1px solid var(--neo-border);
+  border-radius: 16px;
+  box-shadow:
+    0 0 15px rgba(139, 92, 246, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neo-glass:hover {
+  border-color: var(--neo-border-hover);
+  box-shadow:
+    0 0 30px rgba(139, 92, 246, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Strong variant for prominent cards */
+.neo-glass-strong {
+  background: rgba(15, 15, 42, 0.7);
+  backdrop-filter: blur(var(--neo-blur-strong));
+  -webkit-backdrop-filter: blur(var(--neo-blur-strong));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 20px;
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Subtle variant for backgrounds */
+.neo-glass-subtle {
+  background: rgba(15, 15, 42, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.08);
+  border-radius: 12px;
+}
+
+/* === GLOWING EFFECTS === */
+.neo-glow {
+  box-shadow:
+    0 0 20px var(--neo-purple-glow),
+    0 0 40px rgba(139, 92, 246, 0.15),
+    0 0 80px rgba(139, 92, 246, 0.05);
+}
+
+.neo-glow-text {
+  text-shadow: 0 0 20px var(--neo-purple-glow);
+}
+
+.neo-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(139, 92, 246, 0.2),
+      0 0 40px rgba(139, 92, 246, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.4),
+      0 0 60px rgba(139, 92, 246, 0.2);
+  }
+}
+
+/* === ANIMATED GRADIENT BORDER === */
+.neo-border-gradient {
+  position: relative;
+  border: none;
+  background: rgba(15, 15, 42, 0.6);
+  backdrop-filter: blur(var(--neo-blur));
+  -webkit-backdrop-filter: blur(var(--neo-blur));
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.neo-border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.4),
+    rgba(6, 182, 212, 0.2),
+    rgba(236, 72, 153, 0.2),
+    rgba(139, 92, 246, 0.4)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: borderRotate 6s linear infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === NEO INPUT FIELDS === */
+.neo-input {
+  background: rgba(15, 15, 42, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 12px;
+  color: var(--neo-text-primary);
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.neo-input:focus {
+  border-color: var(--neo-purple);
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.15),
+    inset 0 0 10px rgba(139, 92, 246, 0.05);
+}
+
+.neo-input::placeholder {
+  color: var(--neo-text-muted);
+}
+
+/* === NEO BUTTONS === */
+.neo-btn {
+  background: linear-gradient(135deg, var(--neo-purple), var(--neo-purple-dark));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.neo-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.neo-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.neo-btn:hover {
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.4),
+    0 4px 16px rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+.neo-btn-outline {
+  background: transparent;
+  border: 1.5px solid rgba(139, 92, 246, 0.4);
+  color: var(--neo-purple-light);
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neo-btn-outline:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--neo-purple);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+/* === GRADIENT TYPOGRAPHY === */
+.neo-gradient-text {
+  background: linear-gradient(135deg, #8B5CF6, #06B6D4, #EC4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neo-gradient-text-purple {
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6, #7C3AED);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === BACKGROUND EFFECTS === */
+.neo-bg {
+  background: var(--neo-bg-primary);
+  position: relative;
+}
+
+.neo-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 80%, rgba(236, 72, 153, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === SCROLLBAR === */
+.neo-bg::-webkit-scrollbar {
+  width: 8px;
+}
+
+.neo-bg::-webkit-scrollbar-track {
+  background: var(--neo-bg-primary);
+}
+
+.neo-bg::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 4px;
+}
+
+.neo-bg::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* === BADGE/TAG === */
+.neo-badge {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--neo-purple-light);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.neo-badge:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.1);
+}
+
+/* === DIVIDER === */
+.neo-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.3),
+    rgba(6, 182, 212, 0.2),
+    rgba(139, 92, 246, 0.3),
+    transparent
+  );
+  border: none;
+  margin: 0;
+}
+
+/* === UTILITY ANIMATIONS === */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-1deg); }
+}
+
+.neo-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.neo-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.neo-float-slow {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 1s;
+}

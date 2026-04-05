@@ -1,164 +1,135 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Twitter, Facebook, Instagram, Send, Copy, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Github, Linkedin, Twitter, Facebook, Instagram, Send, Copy, Check, ExternalLink, Sparkles } from 'lucide-react';
+import AnimatedSection from "./AnimatedSection";
 
 function Contact() {
   const [emailCopied, setEmailCopied] = useState(false);
   const email = "pranavgawas.work@gmail.com";
 
   const socialLinks = [
-    {
-      name: "GitHub",
-      url: "https://github.com/Pranavgawas/",
-      icon: Github,
-      color: "from-gray-700 to-gray-900",
-      hoverColor: "hover:shadow-gray-500/50"
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/pranavgawas/",
-      icon: Linkedin,
-      color: "from-blue-600 to-blue-800",
-      hoverColor: "hover:shadow-blue-500/50"
-    },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/PranavGawas1999",
-      icon: Twitter,
-      color: "from-sky-400 to-blue-500",
-      hoverColor: "hover:shadow-sky-500/50"
-    },
-    {
-      name: "Instagram",
-      url: "https://www.instagram.com/_pranav_gawas_/",
-      icon: Instagram,
-      color: "from-purple-500 via-pink-500 to-orange-500",
-      hoverColor: "hover:shadow-pink-500/50"
-    },
-    {
-      name: "Facebook",
-      url: "https://www.facebook.com/pranav.b.gawas.5/",
-      icon: Facebook,
-      color: "from-blue-500 to-blue-700",
-      hoverColor: "hover:shadow-blue-500/50"
-    }
+    { name: "GitHub", url: "https://github.com/Pranavgawas/", icon: Github, color: "text-white", glow: "rgba(255,255,255,0.1)" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/pranavgawas/", icon: Linkedin, color: "text-[#0077b5]", glow: "rgba(0,119,181,0.2)" },
+    { name: "Twitter", url: "https://twitter.com/PranavGawas1999", icon: Twitter, color: "text-[#1da1f2]", glow: "rgba(29,161,242,0.2)" },
+    { name: "Instagram", url: "https://www.instagram.com/_pranav_gawas_/", icon: Instagram, color: "text-[#e1306c]", glow: "rgba(225,48,108,0.2)" }
   ];
-
-  const handleEmailClick = () => {
-    window.location.href = `mailto:${email}`;
-  };
 
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email);
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy email:', err);
-    }
+    } catch (err) {}
   };
 
   return (
-    <section id="contactId" className="max-w-4xl mx-auto" aria-labelledby="contact-heading">
-      {/* Main CTA Card */}
-      <div className="card bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 shadow-xl border border-indigo-500/20 backdrop-blur-sm mb-8">
-        <div className="card-body text-center p-8 sm:p-12">
-          <div className="flex justify-center mb-6">
-            <div className="p-4 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl shadow-lg">
-              <Send className="w-8 h-8 sm:w-10 sm:h-10 text-white" aria-hidden="true" />
+    <div id="contactId" className="max-w-5xl mx-auto px-4">
+      <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Left: Contact CTA */}
+        <AnimatedSection animation="fadeInLeft">
+          <div className="neo-glass p-8 md:p-12 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-5">
+              <Send className="w-32 h-32 rotate-12" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 neo-badge mb-6 border-neo-purple/20 bg-neo-purple/10 text-neo-purple">
+                <Sparkles className="w-3 h-3" />
+                <span>Ready for new challenges</span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                Let's build something <span className="neo-gradient-text">extraordinary</span> together.
+              </h2>
+              
+              <p className="text-neo-text-secondary text-lg mb-10 leading-relaxed max-w-md">
+                Currently open to freelance opportunities and full-time roles in full-stack development and system design.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <button 
+                  onClick={() => window.location.href = `mailto:${email}`}
+                  className="neo-btn px-8 py-4 flex items-center gap-3 group/btn"
+                >
+                  <Mail className="w-5 h-5 group-hover/btn:rotate-12 transition-transform" />
+                  Send a Message
+                </button>
+
+                <button 
+                  onClick={handleCopyEmail}
+                  className="neo-btn-outline px-8 py-4 flex items-center gap-3"
+                >
+                  <AnimatePresence mode="wait">
+                    {emailCopied ? (
+                      <motion.div
+                        key="check"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="flex items-center gap-2 text-green-400"
+                      >
+                        <Check className="w-5 h-5" />
+                        <span>Copied!</span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="copy"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        className="flex items-center gap-2"
+                      >
+                        <Copy className="w-5 h-5" />
+                        <span>Copy Email</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
+
+              <div className="mt-12 pt-12 border-t border-white/5">
+                <p className="text-[10px] font-mono text-neo-text-muted uppercase tracking-[0.2em] mb-4">Direct Email</p>
+                <a href={`mailto:${email}`} className="text-xl md:text-2xl font-bold text-neo-purple hover:text-neo-cyan transition-colors duration-300">
+                  {email}
+                </a>
+              </div>
             </div>
           </div>
-          
-          <h2 id="contact-heading" className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Let's Work Together
-          </h2>
-          
-          <p className="text-base sm:text-lg text-base-content/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-            I'm always interested in hearing about new projects and opportunities. 
-            Whether you have a question or just want to say hi, feel free to reach out!
-          </p>
+        </AnimatedSection>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button 
-              onClick={handleEmailClick}
-              className="btn btn-lg gap-3 w-full sm:w-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white border-0 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
-              aria-label="Send email to Pranav Gawas"
-            >
-              <Mail className="w-5 h-5" aria-hidden="true" />
-              Send Email
-            </button>
-            
-            <button 
-              onClick={handleCopyEmail}
-              className="btn btn-lg gap-3 w-full sm:w-auto btn-outline border-2 hover:scale-105 transition-all duration-300"
-              aria-label={emailCopied ? "Email copied to clipboard" : "Copy email to clipboard"}
-            >
-              {emailCopied ? (
-                <>
-                  <Check className="w-5 h-5" aria-hidden="true" />
-                  Copied!
-                </>
-              ) : (
-                <>
-                  <Copy className="w-5 h-5" aria-hidden="true" />
-                  Copy Email
-                </>
-              )}
-            </button>
-          </div>
+        {/* Right: Social Grid */}
+        <div className="grid grid-cols-2 gap-6">
+          {socialLinks.map((social, index) => {
+            const Icon = social.icon;
+            return (
+              <AnimatedSection 
+                key={social.name} 
+                animation="fadeInUp" 
+                delay={index * 100}
+              >
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-glass p-8 flex flex-col items-center justify-center gap-4 text-center group hover:border-white/20 transition-all duration-500"
+                  style={{ '--glow-color': social.glow }}
+                >
+                  <div className={`p-4 rounded-2xl bg-white/5 ${social.color} transition-all duration-500 group-hover:scale-110 group-hover:bg-white/10 group-hover:shadow-[0_0_30px_var(--glow-color)]`}>
+                    <Icon className="w-8 h-8" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <span className="text-white font-bold text-lg block">{social.name}</span>
+                    <span className="text-[10px] font-mono text-neo-text-muted flex items-center gap-1 justify-center mt-1">
+                      FOLLOW <ExternalLink className="w-2 h-2" />
+                    </span>
+                  </div>
+                </a>
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
-
-      {/* Social Links */}
-      <div className="text-center mb-6">
-        <h3 className="text-xl sm:text-2xl font-bold text-base-content mb-6">
-          Connect With Me
-        </h3>
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {socialLinks.map((social, index) => {
-          const IconComponent = social.icon;
-          return (
-            <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`card bg-base-100 shadow-lg hover:shadow-2xl ${social.hoverColor} transition-all duration-300 transform hover:-translate-y-2 border border-base-200 hover:border-transparent overflow-hidden group cursor-pointer`}
-              aria-label={`Visit my ${social.name} profile`}
-            >
-              <div className="card-body p-6 items-center text-center">
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
-                </div>
-                <h4 className="font-semibold text-sm sm:text-base text-base-content mt-3">
-                  {social.name}
-                </h4>
-              </div>
-            </a>
-          );
-        })}
-      </div>
-
-      {/* Quick Info */}
-      <div className="mt-8 text-center">
-        <button 
-          onClick={handleCopyEmail}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-base-200/50 hover:bg-base-200 rounded-full transition-all duration-300 group cursor-pointer"
-          aria-label="Copy email address to clipboard"
-        >
-          <Mail className="w-4 h-4 text-primary" aria-hidden="true" />
-          <span className="text-sm sm:text-base text-base-content/80 group-hover:text-base-content transition-colors">
-            {email}
-          </span>
-          {emailCopied ? (
-            <Check className="w-4 h-4 text-success" aria-hidden="true" />
-          ) : (
-            <Copy className="w-4 h-4 text-base-content/50 group-hover:text-primary transition-colors" aria-hidden="true" />
-          )}
-        </button>
-      </div>
-    </section>
+    </div>
   );
 }
 

@@ -1,30 +1,29 @@
 import React from "react";
 import ProgrammingSkills from "./ProgrammingSkills";
-import Divider from "./Divider.jsx";
 import Miscellaneous from "./Miscellaneous.jsx";
+import SectionHeader from "./SectionHeader.jsx";
+import GlowingDivider from "./GlowingDivider.jsx";
 
 function Skills() {
   return (
-    <div id="skillsId">
-      <div className="mb-8 sm:mb-12">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-          Programming Skills
-        </h2>
-        <p className="text-base sm:text-lg text-base-content/60">
-          Technologies and frameworks I work with
-        </p>
-      </div>
-      <ProgrammingSkills />
-      <Divider />
-      <div className="mb-8 sm:mb-12">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-          Other Skills
-        </h2>
-        <p className="text-base sm:text-lg text-base-content/60">
-          Tools and platforms I use daily
-        </p>
-      </div>
-      <Miscellaneous />
+    <div id="skillsId" className="space-y-16">
+      <section aria-label="Programming Languages and Frameworks">
+        <SectionHeader 
+          title="Programming Expertise" 
+          subtitle="Core Technologies"
+        />
+        <ProgrammingSkills />
+      </section>
+      
+      <GlowingDivider className="opacity-30" />
+      
+      <section aria-label="Other Tools and Platforms">
+        <SectionHeader 
+          title="Technical Toolkit" 
+          subtitle="Misc. Skills"
+        />
+        <Miscellaneous />
+      </section>
     </div>
   );
 }

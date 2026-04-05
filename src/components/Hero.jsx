@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Code2, Terminal, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Code2, Terminal, Sparkles, Rocket, Cpu, Globe, ChevronRight } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
 import { supabase } from '../lib/supabase';
 import { fallbackHero } from '../data/fallbackData';
@@ -18,13 +19,11 @@ function Hero() {
           .single();
 
         if (error || !data) {
-          console.warn('Hero content not found or Supabase error. Using fallback data.');
           setHeroData(fallbackHero);
         } else {
           setHeroData(data);
         }
       } catch (err) {
-        console.error('Connection error. Using fallback data.');
         setHeroData(fallbackHero);
       }
       setLoading(false);
@@ -32,103 +31,149 @@ function Hero() {
     fetchHeroContent();
   }, []);
 
-  if (loading || !heroData) {
-    return (
-      <section id="hero" className="hero min-h-screen bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden flex items-center justify-center">
-        <div className="animate-pulse text-center">
-          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-base-300 mx-auto mb-8"></div>
-          <div className="h-10 bg-base-300 rounded w-80 mx-auto mb-4"></div>
-          <div className="h-6 bg-base-300 rounded w-48 mx-auto mb-4"></div>
-          <div className="h-4 bg-base-300 rounded w-96 mx-auto"></div>
-        </div>
-      </section>
-    );
-  }
+  if (loading || !heroData) return null;
+
+  const titleWords = heroData.heading.split(" ");
 
   return (
-    <section id="hero" className="hero min-h-screen bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden">
-      {/* Animated background elements - optimized for performance */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse motion-reduce:animate-none"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse motion-reduce:animate-none" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse motion-reduce:animate-none" style={{animationDelay: '2s'}}></div>
-      </div>
-      
-      <div className="hero-content text-center px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-xs sm:max-w-md lg:max-w-3xl xl:max-w-5xl">
-          {/* Profile Image & Icon decorations */}
-          <div className="flex flex-col items-center mb-8 relative">
-            <div className="relative group mb-8">
-              {/* Outer glowing rings */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-              
-              {/* Profile Image Container */}
-              <div className="relative w-32 h-32 sm:w-40 sm:h-40 xl:w-48 xl:h-48 rounded-full overflow-hidden border-4 border-base-100 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
-                <img 
-                  src={heroData.avatar_url} 
-                  alt="Pranav Gawas" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 pb-12 px-6">
+      {/* Background Lighting Effects */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neo-purple/20 blur-[120px] rounded-full -z-10 animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-neo-cyan/10 blur-[120px] rounded-full -z-10" />
 
-              {/* Floating decorations */}
-              <div className="absolute -top-4 -right-4 p-3 bg-primary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '0s', animationDuration: '3s'}}>
-                <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-primary" aria-hidden="true" />
-              </div>
-              <div className="absolute top-1/2 -left-8 transform -translate-y-1/2 p-3 bg-secondary/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '0.5s', animationDuration: '3s'}}>
-                <Terminal className="w-6 h-6 sm:w-8 sm:h-8 text-secondary" aria-hidden="true" />
-              </div>
-              <div className="absolute -bottom-4 right-1/2 transform translate-x-1/2 p-3 bg-accent/20 rounded-2xl backdrop-blur-sm animate-bounce motion-reduce:animate-none shadow-lg" style={{animationDelay: '1s', animationDuration: '3s'}}>
-                <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-accent" aria-hidden="true" />
-              </div>
-            </div>
-          </div>
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        
+        {/* Left Column: Text Content */}
+        <div className="lg:col-span-12 xl:col-span-7 flex flex-col items-center xl:items-start text-center xl:text-left order-2 xl:order-1">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="neo-badge mb-8 flex items-center gap-3 px-6 py-2 border-white/10"
+          >
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-white font-mono text-[11px] tracking-widest uppercase">Open for Innovation</span>
+          </motion.div>
 
-          <h1 className="mb-5 sm:mb-6 lg:mb-8 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            {heroData.heading}
-          </h1>
-          
-          <h2 className="mb-4 sm:mb-5 text-xl sm:text-2xl lg:text-3xl font-semibold text-base-content">
-            {heroData.subheading}
-          </h2>
-          
-          <p className="mb-6 sm:mb-8 lg:mb-10 text-sm sm:text-base lg:text-lg leading-relaxed text-base-content/80 max-w-3xl mx-auto">
-            {heroData.bio}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button 
-              className="btn btn-lg min-h-[48px] sm:min-h-[52px] w-full sm:w-auto px-6 sm:px-8 lg:px-10 text-base sm:text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white border-0" 
-              onClick={() => scrollToSection("projectId")}
-              aria-label="View my projects"
-            >
-              View My Work
-            </button>
-            <button 
-              className="btn btn-lg min-h-[48px] sm:min-h-[52px] w-full sm:w-auto px-6 sm:px-8 lg:px-10 text-base sm:text-lg font-semibold hover:scale-105 transition-all duration-300 border-2 border-indigo-500/50 hover:border-indigo-500 hover:bg-indigo-500/10 backdrop-blur-sm" 
-              onClick={() => scrollToSection("contactId")}
-              aria-label="Contact me"
-            >
-              Let's Connect
-            </button>
-          </div>
-
-          {/* Tech stack badges */}
-          <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
-            {heroData.tech_stack.map((tech, index) => (
-              <span 
-                key={index}
-                className="badge badge-lg badge-outline hover:badge-primary transition-all duration-200 px-3 sm:px-4 py-3 sm:py-4 text-xs sm:text-sm font-medium cursor-default"
-                role="listitem"
+          <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold leading-[1.1] text-white mb-8 tracking-tight">
+            {titleWords.map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * i, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                className={`inline-block mr-4 ${i >= titleWords.length - 2 ? 'neo-gradient-text' : ''}`}
               >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="text-lg md:text-xl text-neo-text-secondary mb-12 max-w-2xl leading-relaxed font-medium"
+          >
+            {heroData.subheading} — <span className="text-neo-text-muted">{heroData.bio}</span>
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto"
+          >
+            <button 
+              onClick={() => scrollToSection("projectId")}
+              className="neo-btn group"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                Explore Projects
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+            <button 
+              onClick={() => scrollToSection("contactId")}
+              className="neo-btn-outline group relative overflow-hidden"
+            >
+              <span className="relative z-10">Get in Touch</span>
+              <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </button>
+          </motion.div>
+
+          {/* Tech Stack Chips */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 1 }}
+            className="mt-16 flex flex-wrap justify-center xl:justify-start gap-3"
+          >
+            {heroData.tech_stack.map((tech, index) => (
+              <span key={index} className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-neo-text-muted text-xs font-bold hover:text-white hover:border-neo-purple/50 transition-all duration-300">
                 {tech}
               </span>
             ))}
-          </div>
+          </motion.div>
         </div>
+
+        {/* Right Column: Visual Component */}
+        <div className="lg:col-span-12 xl:col-span-5 flex justify-center items-center order-1 xl:order-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="relative"
+          >
+            {/* The Main Container */}
+            <div className="neo-glass p-6 md:p-10 relative z-10 overflow-hidden group">
+              <div className="aspect-square w-64 md:w-80 rounded-2xl overflow-hidden relative border border-white/10">
+                <img 
+                  src={heroData.avatar_url} 
+                  alt="Pranav" 
+                  className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 scale-110 group-hover:scale-100"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neo-bg via-transparent to-transparent opacity-60" />
+              </div>
+              
+              <div className="mt-8 flex justify-between items-center group-hover:translate-y-[-5px] transition-transform duration-500">
+                <div>
+                  <h3 className="text-xl font-bold text-white tracking-tight">Pranav Gawas</h3>
+                  <p className="text-neo-text-muted text-xs font-mono tracking-widest uppercase mt-1">Full Stack Engineer</p>
+                </div>
+                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-neo-purple">
+                  <Terminal className="w-5 h-5" />
+                </div>
+              </div>
+
+              {/* Decorative hardware-like line */}
+              <div className="mt-8 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            {/* Floating Badges */}
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-6 -right-6 p-4 neo-glass border-white/10 text-neo-cyan shadow-xl z-20 backdrop-blur-3xl"
+            >
+              <Cpu className="w-6 h-6" />
+            </motion.div>
+            
+            <motion.div 
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -bottom-6 -left-6 p-4 neo-glass border-white/10 text-neo-pink shadow-xl z-20 backdrop-blur-3xl"
+            >
+              <Rocket className="w-6 h-6" />
+            </motion.div>
+
+            {/* Orb behind */}
+            <div className="absolute inset-0 bg-neo-purple/20 blur-[80px] -z-10 scale-150 animate-pulse" />
+          </motion.div>
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
 
 export default Hero;

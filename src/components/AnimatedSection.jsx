@@ -1,58 +1,59 @@
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import { motion } from 'framer-motion';
 
 const AnimatedSection = ({ 
   children, 
   className = '', 
   animation = 'fadeInUp',
   delay = 0,
-  duration = 600 
+  duration = 0.6,
+  threshold = 0.2,
+  once = true
 }) => {
-  const { elementRef, hasIntersected } = useIntersectionObserver({
-    threshold: 0.1,
-    rootMargin: '50px'
-  });
-
-  const animations = {
+  const variants = {
     fadeInUp: {
-      initial: 'opacity-0 translate-y-8',
-      animate: 'opacity-100 translate-y-0'
+      hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
+      visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
+    },
+    fadeInDown: {
+      hidden: { opacity: 0, y: -30, filter: 'blur(8px)' },
+      visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
     },
     fadeInLeft: {
-      initial: 'opacity-0 -translate-x-8',
-      animate: 'opacity-100 translate-x-0'
+      hidden: { opacity: 0, x: -30, filter: 'blur(8px)' },
+      visible: { opacity: 1, x: 0, filter: 'blur(0px)' }
     },
     fadeInRight: {
-      initial: 'opacity-0 translate-x-8',
-      animate: 'opacity-100 translate-x-0'
+      hidden: { opacity: 0, x: 30, filter: 'blur(8px)' },
+      visible: { opacity: 1, x: 0, filter: 'blur(0px)' }
     },
     fadeIn: {
-      initial: 'opacity-0',
-      animate: 'opacity-100'
+      hidden: { opacity: 0, filter: 'blur(8px)' },
+      visible: { opacity: 1, filter: 'blur(0px)' }
     },
     scaleIn: {
-      initial: 'opacity-0 scale-95',
-      animate: 'opacity-100 scale-100'
+      hidden: { opacity: 0, scale: 0.9, filter: 'blur(8px)' },
+      visible: { opacity: 1, scale: 1, filter: 'blur(0px)' }
     }
   };
 
-  const selectedAnimation = animations[animation] || animations.fadeInUp;
-  
+  const selectedVariant = variants[animation] || variants.fadeInUp;
+
   return (
-    <div
-      ref={elementRef}
-      className={`
-        transform transition-all duration-${duration} ease-out
-        ${hasIntersected ? selectedAnimation.animate : selectedAnimation.initial}
-        ${className}
-      `}
-      style={{ 
-        transitionDelay: hasIntersected ? `${delay}ms` : '0ms',
-        transitionDuration: `${duration}ms`
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, amount: threshold }}
+      transition={{ 
+        duration, 
+        delay: delay / 1000,
+        ease: [0.25, 0.1, 0.25, 1] // Custom ease-out
       }}
+      variants={selectedVariant}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,251 +1,135 @@
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import image from "../assets/image.json";
 import { scrollToSection, getCurrentSection } from "../utils/scrollUtils";
 
 function Navbar() {
   const avatarUrl = image["avatar"];
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark"
-  );
   const [activeSection, setActiveSection] = useState("hero");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
-
-  // Track active section on scroll
   useEffect(() => {
     let timeoutId = null;
     
     const handleScroll = () => {
-      // Debounce scroll events for better performance
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
+      setIsScrolled(window.scrollY > 50);
+      if (timeoutId) clearTimeout(timeoutId);
       
       timeoutId = setTimeout(() => {
         const currentSection = getCurrentSection();
         setActiveSection(currentSection);
-      }, 50); // 50ms debounce
+      }, 50);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check initial state
+    handleScroll();
 
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
+      if (timeoutId) clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+  const navItems = [
+    { id: "hero", label: "Home" },
+    { id: "projectId", label: "Projects" },
+    { id: "educationId", label: "Experience" },
+    { id: "skillsId", label: "Skills" },
+    { id: "contactId", label: "Contact" },
+  ];
 
   const handleNavClick = (sectionId) => {
     scrollToSection(sectionId);
-    setIsMenuOpen(false); // Close mobile menu after click
+    setIsMenuOpen(false);
   };
 
-  const isActive = (sectionId) => activeSection === sectionId;
-
   return (
-    <nav className="navbar bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-base-100/95" role="navigation" aria-label="Main navigation">
-      {/* Skip to main content link for accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 btn btn-primary z-[60]">
-        Skip to main content
-      </a>
-      
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div className="flex-none">
-            <button 
-              className="btn btn-square btn-ghost hover:bg-primary/10 transition-colors"
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block w-5 h-5 stroke-current"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 border border-base-200"
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 md:px-8 py-6 ${
+        isScrolled ? 'py-4 translate-y-0' : 'py-8'
+      }`}
+    >
+      <div className={`max-w-5xl mx-auto neo-glass flex items-center justify-between px-6 py-3 transition-all duration-500 ${
+        isScrolled ? 'shadow-[0_8px_32px_rgba(0,0,0,0.5)] border-white/20' : 'border-white/10'
+      }`}>
+        <div className="flex items-center gap-4">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            className="w-10 h-10 rounded-xl border border-white/10 overflow-hidden shadow-lg"
           >
-            <li>
-              <a 
-                onClick={() => handleNavClick("projectId")} 
-                className={`hover:bg-primary/10 ${isActive("projectId") ? "bg-primary/20 font-semibold" : ""}`}
-              >
-                Projects
-              </a>
-            </li>
-            <li>
-              <a 
-                onClick={() => handleNavClick("educationId")} 
-                className={`hover:bg-primary/10 ${isActive("educationId") ? "bg-primary/20 font-semibold" : ""}`}
-              >
-                Education
-              </a>
-            </li>
-            <li>
-              <a 
-                onClick={() => handleNavClick("skillsId")} 
-                className={`hover:bg-primary/10 ${isActive("skillsId") ? "bg-primary/20 font-semibold" : ""}`}
-              >
-                Skills
-              </a>
-            </li>
-            <li>
-              <a 
-                onClick={() => handleNavClick("certificateId")} 
-                className={`hover:bg-primary/10 ${isActive("certificateId") ? "bg-primary/20 font-semibold" : ""}`}
-              >
-                Certifications
-              </a>
-            </li>
-            <li>
-              <a 
-                onClick={() => handleNavClick("contactId")} 
-                className={`hover:bg-primary/10 ${isActive("contactId") ? "bg-primary/20 font-semibold" : ""}`}
-              >
-                Contact
-              </a>
-            </li>
-          </ul>
+            <img alt="Pranav" src={avatarUrl} className="w-full h-full object-cover" />
+          </motion.div>
+          <button 
+            className="text-lg font-bold text-white tracking-tight hover:text-neo-purple transition-colors"
+            onClick={() => handleNavClick("hero")}
+          >
+            Pranav <span className="neo-gradient-text">Gawas</span>
+          </button>
         </div>
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar ring-2 ring-primary/20 ring-offset-2 ring-offset-base-100 hover:ring-primary/40 transition-all"
-          aria-label="Pranav Gawas profile picture"
-        >
-          <div className="w-10 rounded-full">
-            <img alt="Pranav Gawas Avatar" src={avatarUrl} />
-          </div>
+
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-2">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className={`px-5 py-2.5 text-sm font-bold tracking-wide transition-all duration-300 relative rounded-xl ${
+                activeSection === item.id 
+                  ? 'text-white bg-white/10' 
+                  : 'text-neo-text-secondary hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {item.label}
+              {activeSection === item.id && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-neo-purple rounded-full shadow-[0_0_10px_var(--neo-purple)]"
+                  transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
+                />
+              )}
+            </button>
+          ))}
         </div>
+
+        {/* Mobile Toggle */}
         <button 
-          className="btn btn-ghost text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:from-secondary hover:to-accent transition-all"
-          onClick={() => handleNavClick("hero")}
-          aria-label="Go to homepage"
+          className="lg:hidden p-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          Pranav Gawas
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+          </svg>
         </button>
       </div>
-      <div
-        className="navbar-center hidden lg:flex"
-        style={{ marginLeft: "-100px" }}
-      >
-        <ul className="menu menu-horizontal px-1" role="menubar">
-          <li role="none">
-            <a 
-              onClick={() => handleNavClick("projectId")} 
-              className={`hover:bg-primary/10 ${isActive("projectId") ? "bg-primary/20 font-semibold" : ""}`}
-              role="menuitem"
-            >
-              Projects
-            </a>
-          </li>
-          <li role="none">
-            <a 
-              onClick={() => handleNavClick("educationId")} 
-              className={`hover:bg-primary/10 ${isActive("educationId") ? "bg-primary/20 font-semibold" : ""}`}
-              role="menuitem"
-            >
-              Education
-            </a>
-          </li>
-          <li role="none">
-            <a 
-              onClick={() => handleNavClick("skillsId")} 
-              className={`hover:bg-primary/10 ${isActive("skillsId") ? "bg-primary/20 font-semibold" : ""}`}
-              role="menuitem"
-            >
-              Skills
-            </a>
-          </li>
-          <li role="none">
-            <a 
-              onClick={() => handleNavClick("certificateId")} 
-              className={`hover:bg-primary/10 ${isActive("certificateId") ? "bg-primary/20 font-semibold" : ""}`}
-              role="menuitem"
-            >
-              Certifications
-            </a>
-          </li>
-          <li role="none">
-            <a 
-              onClick={() => handleNavClick("contactId")} 
-              className={`hover:bg-primary/10 ${isActive("contactId") ? "bg-primary/20 font-semibold" : ""}`}
-              role="menuitem"
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div className="flex-none ml-auto">
-        <label className="flex cursor-pointer gap-2 p-2 rounded-lg hover:bg-base-200 transition-colors">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-warning"
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="absolute top-24 left-4 right-4 lg:hidden neo-glass p-4"
           >
-            <circle cx="12" cy="12" r="5" />
-            <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-          </svg>
-          <input
-            type="checkbox"
-            value="synthwave"
-            className="toggle theme-controller toggle-primary"
-            onChange={handleToggle}
-            checked={theme === "dark" ? true : false}
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-info"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </label>
-      </div>
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`w-full text-left px-5 py-4 rounded-2xl font-bold transition-all ${
+                    activeSection === item.id 
+                      ? 'bg-white/10 text-white border border-white/10' 
+                      : 'text-neo-text-secondary hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
