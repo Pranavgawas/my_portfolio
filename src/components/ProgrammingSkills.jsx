@@ -60,14 +60,9 @@ function ProgrammingSkills() {
                 {skill.description}
               </p>
 
-              {/* Skill level indicator (Visual decorative) */}
               <div className="mt-auto pt-6 flex items-center gap-2">
-                <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-neo-purple to-neo-cyan w-[85%]" 
-                  />
-                </div>
-                <span className="text-[10px] font-mono text-neo-purple">ESTABLISHED</span>
+                <div className="w-2 h-2 rounded-full bg-neo-purple" />
+                <span className="text-[10px] font-mono text-neo-purple uppercase tracking-widest">In Stack</span>
               </div>
             </div>
           </AnimatedSection>
