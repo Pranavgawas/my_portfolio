@@ -51,23 +51,9 @@ class SimpleAnalytics {
 
     this.events.push(event);
 
-    // In development, just log to console
     if (process.env.NODE_ENV === 'development') {
       console.log('Analytics Event:', event);
     }
-
-    // In production, you could send to your analytics service
-    // this.sendToAnalyticsService(event);
-  }
-
-  // Method to send data to analytics service (implement as needed)
-  sendToAnalyticsService(event) {
-    // Example: Send to your own analytics endpoint
-    // fetch('/api/analytics', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(event)
-    // }).catch(console.error);
   }
 
   // Setup automatic tracking

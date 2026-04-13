@@ -307,6 +307,65 @@
   margin: 0;
 }
 
+/* === FOCUS VISIBLE (ACCESSIBILITY) === */
+/*
+ * Show focus ring only for keyboard navigation (not mouse clicks).
+ * Applies to all interactive elements using the modern :focus-visible API.
+ */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--neo-purple);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.neo-btn:focus-visible,
+.neo-btn-outline:focus-visible {
+  outline: 2px solid var(--neo-purple);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* === CUSTOM CURSOR — only on fine-pointer (mouse) devices === */
+/*
+ * Hide the default cursor on desktop so the custom cursor overlay
+ * (CustomCursor.jsx) is the only cursor visible.
+ * On touch devices (hover: none) the default cursor is preserved.
+ */
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  [role="button"],
+  input,
+  label,
+  select,
+  textarea {
+    cursor: none;
+  }
+}
+
+/* === REDUCED MOTION === */
+/*
+ * Respect users who prefer reduced motion by disabling all animations
+ * and transitions. Framer Motion honours this automatically via its
+ * useReducedMotion hook, so this covers CSS-only animations.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* === UTILITY ANIMATIONS === */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
