@@ -22,8 +22,7 @@ export default defineConfig({
     target: 'es2020',
     // Optimize bundle size
     cssMinify: true,
-    // Enable tree shaking
-    treeshake: true
+    // Tree shaking is enabled by default in Rollup/Vite
   },
   // Development server optimization
   server: {

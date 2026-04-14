@@ -26,7 +26,7 @@ const PageLoader = ({ onComplete }) => {
       className="fixed inset-0 z-[10000] bg-[#0a0a1a] flex flex-col justify-center items-center overflow-hidden"
     >
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%) pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%)' }} />
       
       {/* Logo Placeholder / Symbol */}
       <motion.div

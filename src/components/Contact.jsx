@@ -19,7 +19,9 @@ function Contact() {
       await navigator.clipboard.writeText(email);
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2000);
-    } catch (err) {}
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
   };
 
   return (

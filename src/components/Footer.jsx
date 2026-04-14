@@ -71,7 +71,7 @@ function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between w-full gap-4 text-neo-text-muted text-xs font-medium">
             <p>© {currentYear} Pranav Gawas. All rights reserved.</p>
             <p className="flex items-center gap-1">
-              Built with <Heart className="w-3 h-3 text-neo-pink fill-neo-pink" /> 2024
+              Built with <Heart className="w-3 h-3 text-neo-pink fill-neo-pink" /> {currentYear}
             </p>
           </div>
         </div>

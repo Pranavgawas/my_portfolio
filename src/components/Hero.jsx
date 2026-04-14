@@ -7,30 +7,47 @@ import { supabase } from '../lib/supabase';
 function Hero() {
   const [heroData, setHeroData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      setError(true);
+    }, 8000);
+
     async function fetchHeroContent() {
       try {
-        const { data, error } = await supabase
+        const { data, err } = await supabase
           .from('hero_content')
           .select('*')
           .limit(1)
           .single();
 
-        if (!error && data) {
+        if (!err && data) {
           setHeroData(data);
+        } else {
+          setError(true);
         }
       } catch (err) {
         console.error('Error fetching hero content:', err);
+        setError(true);
       }
+      clearTimeout(timeout);
       setLoading(false);
     }
     fetchHeroContent();
+    return () => clearTimeout(timeout);
   }, []);
 
-  if (loading || !heroData) return (
+  if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-neo-bg-primary">
       <div className="w-12 h-12 border-4 border-neo-purple border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+
+  if (error || !heroData) return (
+    <div className="min-h-screen flex items-center justify-center bg-neo-bg-primary">
+      <p className="text-neo-text-muted text-sm">Could not load hero content. Please refresh.</p>
     </div>
   );
 
